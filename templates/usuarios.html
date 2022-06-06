@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Usuarios
+{% endblock %}
+
+{% block contenido %}
+<h1 style="margin-left:30rem">Listado de Usuarios</h1>
+<div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+    {% for usuario in usuarios %}
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{usuario.nombre}}</h5>
+            <p class="card-text">{{usuario.apellido}}</p>
+            <p class="card-text">{{usuario.nickname}}</p>
+            <p class="card-text">{{usuario.email}}</p>
+            <p class="card-text">{{usuario.clave}}</p>
+            <p class="card-text">{{usuario.habilitado}}</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
