@@ -6,26 +6,28 @@
 
 {% block contenido %}
 <h1 style="margin-left:30rem">Listado de Paginas</h1>
-<div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+<div class="container-fluid">
     {% for pagina in paginas %}
-
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{pagina.titulo}}</h5>
-            <p class="card-text">{{pagina.fecha}}</p>
-            <p class="card-text">{{pagina.copete}}</p>
-            {% if pagina.imagen %}
-                <p><img src="{{ pagina.imagen.url }}" alt="{{ pagina.imagen_epigrafe}}" style="width: 100%;"></p>
-            {% endif %}
-
-
-
-            <p class="card-text">{{pagina.habilitada}}</p>
-            <a href="#" class="btn btn-primary">Ver</a>
-        </div>
-    </div>
-
+        {% if forloop.counter0|divisibleby:4 %} 
+            <div class="row mb-5"> 
+        {%  endif %}
+                <div class="col-md-3">        
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{pagina.titulo}}</h5>
+                            <p class="card-text">{{pagina.fecha}}</p>
+                            <p class="card-text">{{pagina.copete}}</p>
+                            {% if pagina.imagen %}
+                                <p><img src="{{ pagina.imagen.url }}" alt="{{ pagina.imagen_epigrafe}}" style="width: 100%;"></p>
+                            {% endif %}
+                            <p class="card-text">{{pagina.habilitada}}</p>
+                            <a href="#" class="btn btn-primary">Ver</a>
+                        </div>
+                    </div>
+                </div>
+        {% if forloop.counter|divisibleby:4 or forloop.last %}
+            </div><!-- row closing -->
+        {% endif %}
     {% endfor %}
 </div>
-
 {% endblock %}
