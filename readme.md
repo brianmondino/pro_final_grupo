@@ -1,6 +1,9 @@
-#Superusuario
-#usuario: proyectofinal
-#password: abc123
+# proyecto_log
+Proyecto final curso CoderHouse - LOG
+
+## Descarga
+    Desde una consola o el bash de git usar el siguiente comando
+        git clone https://github.com/xxFALKORxx/proyecto_log.git
 
 
 ## Instalacion:
