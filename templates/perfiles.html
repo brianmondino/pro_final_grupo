@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Perfiles
+{% endblock %}
+
+{% block contenido %}
+<h1 style="margin-left:30rem">Listado de Perfiles</h1>
+<div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+    {% for perfil in perfiles %}
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{perfil.nombre}}</h5>
+            <p class="card-text">{{perfil.habilitado}}</p>
+            <p class="card-text">{{perfil.tipo}}</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Buscador de Páginas
+{% endblock %}
+
+
+{% block contenido %}
+<h1 style="margin-left:30rem">Resultado de Búsqueda</h1>
+{% if paginas %}
+    <div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+        {% for pagina in paginas %}
+            
+            <div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{pagina.titulo}}</h5>
+                        <p class="card-text">{{pagina.fecha}}</p>
+                        <a href="#" class="btn btn-primary">Ver</a>
+                    </div>
+                </div>
+            </div>
+        
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+<div style = "color:red; margin-left:25rem">{{errors}}</div>
+
+{% endblock %}
