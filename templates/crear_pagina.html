@@ -7,8 +7,13 @@ Crear Pagina
 {% block contenido %}
 
     {% if form %}
+<<<<<<< HEAD
         <h2 style="margin-left:30rem">Complete los campos de la nueva Paǵina</h2>
         <form action="" method="POST" style="margin-left:40rem;margin-top:7rem">
+=======
+        <h2 style="margin-left:30rem">Complete los campos de la nueva Página</h2>
+        <form action="" method="POST" style="margin-left:40rem;margin-top:7rem" enctype="multipart/form-data">
+>>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437
             {% csrf_token %}
             <table>
                 {{form.as_table}}

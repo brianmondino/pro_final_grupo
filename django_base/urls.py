@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django_base.views import index
+<<<<<<< HEAD
+=======
+from django.conf import settings
+from django.conf.urls.static import static
+>>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +29,8 @@ urlpatterns = [
     path('usuarios/', include('usuarios.urls')),
     path('perfiles/', include('perfiles.urls')),
 
+<<<<<<< HEAD
 ]
+=======
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437

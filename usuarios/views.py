@@ -23,7 +23,10 @@ def crear_usuario(request):
                 nickname = form.cleaned_data['nickname'],
                 email = form.cleaned_data['email'],
                 clave = form.cleaned_data['clave'],
+<<<<<<< HEAD
                 perfilid = form.cleaned_data['perfilid'],
+=======
+>>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437
                 habilitado = form.cleaned_data['habilitado'],
             )
             context = {'nuevo_usuario':nuevo_usuario}
