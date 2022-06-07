@@ -6,7 +6,8 @@ class Paginas(models.Model):
     fecha = models.DateTimeField()
     copete = models.CharField(max_length=255)
     cuerpo = models.CharField(max_length=2000)
-    imagen = models.CharField(max_length=50)
+    imagen = models.ImageField(upload_to='imagenes', blank=True)
+    imagen_epigrafe = models.CharField(max_length=50, blank=True, null=True)    
     habilitada = models.BooleanField(default=False)
     class Meta:
         verbose_name = 'pagina'

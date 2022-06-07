@@ -16,13 +16,15 @@ def crear_pagina(request):
         context = {'form':form}
         return render(request, 'crear_pagina.html', context=context)
     elif request.method == 'POST':        
-        form = Pagina_form(request.POST)
+        form = Pagina_form(request.POST, request.FILES)
         if form.is_valid():
             nueva_pagina = Paginas.objects.create(
                 titulo = form.cleaned_data['titulo'],
+                fecha = form.cleaned_data['fecha'],
                 copete = form.cleaned_data['copete'],
                 cuerpo = form.cleaned_data['cuerpo'],
-                fecha = form.cleaned_data['fecha'],
+                imagen = form.cleaned_data['imagen'], 
+                imagen_epigrafe = form.cleaned_data['imagen_epigrafe'],                
                 habilitada = form.cleaned_data['habilitada'],
             )
             context = {'nueva_pagina':nueva_pagina}
