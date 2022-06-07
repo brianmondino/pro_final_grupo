@@ -21,10 +21,7 @@ def crear_perfil(request):
             nuevo_perfil = Perfiles.objects.create(
                 nombre = form.cleaned_data['nombre'],
                 habilitado = form.cleaned_data['habilitado'],
-<<<<<<< HEAD
                 tipo = form.cleaned_data['tipo'],
-=======
->>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437
             )
             context = {'nuevo_perfil':nuevo_perfil}
         else:

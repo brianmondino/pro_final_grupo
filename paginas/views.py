@@ -3,12 +3,9 @@ from paginas.models import Paginas
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
 
-<<<<<<< HEAD
 from perfiles.models import Perfiles
 from usuarios.models import Usuarios
 
-=======
->>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437
 
 # Create your views here.       
 def listar_paginas(request):
@@ -22,15 +19,6 @@ def crear_pagina(request):
         context = {'form':form}
         return render(request, 'crear_pagina.html', context=context)
     elif request.method == 'POST':        
-<<<<<<< HEAD
-        form = Pagina_form(request.POST)
-        if form.is_valid():
-            nueva_pagina = Paginas.objects.create(
-                titulo = form.cleaned_data['titulo'],
-                copete = form.cleaned_data['copete'],
-                cuerpo = form.cleaned_data['cuerpo'],
-                fecha = form.cleaned_data['fecha'],
-=======
         form = Pagina_form(request.POST, request.FILES)
         if form.is_valid():
             nueva_pagina = Paginas.objects.create(
@@ -40,7 +28,6 @@ def crear_pagina(request):
                 cuerpo = form.cleaned_data['cuerpo'],
                 imagen = form.cleaned_data['imagen'], 
                 imagen_epigrafe = form.cleaned_data['imagen_epigrafe'],                
->>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437
                 habilitada = form.cleaned_data['habilitada'],
             )
             context = {'nueva_pagina':nueva_pagina}
@@ -52,7 +39,6 @@ def crear_pagina(request):
         return HttpResponse('Only GET and POST methods are allowed')
 
 def buscar_pagina(request):
-<<<<<<< HEAD
     palabra_busqueda = request.GET['buscar']
     paginas = Paginas.objects.filter(titulo__icontains = palabra_busqueda)
     perfil_buscar = Perfiles.objects.filter(nombre__icontains = palabra_busqueda)
@@ -70,11 +56,4 @@ def buscar_pagina(request):
             return render(request, 'buscar_usuario.html', context = context)
     else:
         context = {'errors':'No se encontro el valor correcto'}
-=======
-    paginas = Paginas.objects.filter(titulo__icontains=request.GET['buscar'])
-    if paginas.exists():
-        context = {'paginas':paginas}
-    else:
-        context = {'errors':'No se encontro el producto'}
->>>>>>> 9e179c583b96e45c35c03d0ac44485d7d6f12437
     return render(request, 'buscar_paginas.html', context = context)
