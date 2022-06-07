@@ -32,3 +32,11 @@ def crear_pagina(request):
 
     else:
         return HttpResponse('Only GET and POST methods are allowed')
+
+def buscar_pagina(request):
+    paginas = Paginas.objects.filter(titulo__icontains=request.GET['buscar'])
+    if paginas.exists():
+        context = {'paginas':paginas}
+    else:
+        context = {'errors':'No se encontro el producto'}
+    return render(request, 'buscar_paginas.html', context = context)
