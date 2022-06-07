@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Paginas
+{% endblock %}
+
+{% block contenido %}
+<h1 style="margin-left:30rem">Listado de Paginas</h1>
+<div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+    {% for pagina in paginas %}
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{pagina.titulo}}</h5>
+            <p class="card-text">{{pagina.fecha}}</p>
+            <p class="card-text">{{pagina.copete}}</p>
+            {% if pagina.imagen %}
+                <p><img src="{{ pagina.imagen.url }}" alt="{{ pagina.imagen_epigrafe}}" style="max-height:300px"></p>
+            {% endif %}
+
+
+
+            <p class="card-text">{{pagina.habilitada}}</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

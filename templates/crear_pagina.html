@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Crear Pagina
+{% endblock %}
+
+{% block contenido %}
+
+    {% if form %}
+        <h2 style="margin-left:30rem">Complete los campos de la nueva Página</h2>
+        <form action="" method="POST" style="margin-left:40rem;margin-top:7rem" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            <input type="submit" , value="Enviar">
+        </form>
+
+
+
+    {% elif nueva_pagina %}
+        <h2 style="color:green; margin-left:33rem">Nueva pagina creada</h2>
+        <div class="card" style="width: 18rem;background-color: aqua;margin-top:4rem;margin-left:35rem">
+            <div class="card-body">
+                <h5 class="card-title">Titulo: {{nueva_pagina.titulo}}</h5>
+                <p class="card-text">Copete: {{nueva_pagina.copete}}</p>
+                <p class="card-text">Fecha: {{nueva_pagina.fecha}}</p>
+            </div>
+        </div>
+
+
+
+        {% else %}
+        <h2 style = "color:red; margin-left:25rem"> Ocurrio un error en la carga de la pagina</h2>
+        
+            <div style = "margin-left:25rem;">{{errors}}</div>
+        
+    {% endif %}
+{% endblock %}
