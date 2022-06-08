@@ -101,7 +101,45 @@ paginas
 		urls.py
 		views.py
 
-		
+
 perfiles
-templates
+
+	Archivos
+
+		__init__.py
+		admin.py
+		apps.py
+		forms.py
+		models.py
+		urls.py
+		views.py
+
+
 usuarios
+
+	Archivos
+
+		__init__.py
+		admin.py
+		apps.py
+		forms.py
+		models.py
+		urls.py
+		views.py
+
+
+templates
+
+	Archivos
+
+		base.html
+		buscar_paginas.html
+		buscar_perfil.html
+		buscar_usuario.html
+		crear_pagina.html
+		crear_perfil.html
+		crear_usuario.html
+		index.html
+		paginas.html
+		perfiles.html
+		usuarios.html
