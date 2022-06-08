@@ -15,7 +15,7 @@ def crear_usuario(request):
         context = {'form':form}
         return render(request, 'crear_usuario.html', context=context)
     elif request.method == 'POST':        
-        form = Usuario_form(request.POST)
+        form = Usuario_form(request.POST, request.FILES)
         if form.is_valid():
             nuevo_usuario = Usuarios.objects.create(
                 nombre = form.cleaned_data['nombre'],
@@ -24,6 +24,7 @@ def crear_usuario(request):
                 email = form.cleaned_data['email'],
                 clave = form.cleaned_data['clave'],
                 perfilid = form.cleaned_data['perfilid'],
+                imagen = form.cleaned_data['imagen'],
                 habilitado = form.cleaned_data['habilitado'],
             )
             context = {'nuevo_usuario':nuevo_usuario}

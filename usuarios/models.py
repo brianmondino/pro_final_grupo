@@ -9,6 +9,7 @@ class Usuarios(models.Model):
     clave = models.CharField(max_length=20)
     perfilid = models.IntegerField(default=0)
     habilitado = models.BooleanField(default=False)
+    imagen = models.ImageField(upload_to='imagenes', blank=True)
     class Meta:
         verbose_name = 'usuario'
         verbose_name_plural = 'usuarios'

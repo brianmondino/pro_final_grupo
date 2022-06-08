@@ -16,12 +16,13 @@ def crear_perfil(request):
         context = {'form':form}
         return render(request, 'crear_perfil.html', context=context)
     elif request.method == 'POST':        
-        form = Perfil_form(request.POST)
+        form = Perfil_form(request.POST, request.FILES)
         if form.is_valid():
             nuevo_perfil = Perfiles.objects.create(
                 nombre = form.cleaned_data['nombre'],
                 habilitado = form.cleaned_data['habilitado'],
                 tipo = form.cleaned_data['tipo'],
+                imagen = form.cleaned_data['imagen'], 
             )
             context = {'nuevo_perfil':nuevo_perfil}
         else:
