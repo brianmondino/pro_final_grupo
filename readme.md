@@ -96,14 +96,9 @@ paginas
 		__init__.py
 		admin.py
 		apps.py
-			class PaginasConfig(AppConfig) - añade el modelo de paginas para usarse desde el admin
 		forms.py
-			class Pagina_form(forms.ModelForm)
 		models.py
-			class Paginas(models.Model) - modelado de la tabla de paginas
 		urls.py
-			mapeado de urls para los templates de paginas
-				paginas,crear_pagina,buscar_paginas
 		views.py
 
 
