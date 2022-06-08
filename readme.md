@@ -96,6 +96,7 @@ paginas
 		__init__.py
 		admin.py
 		apps.py
+			class PaginasConfig(AppConfig) - añade el modelo de paginas para usarse desde el admin
 		forms.py
 		models.py
 		urls.py
