@@ -82,3 +82,26 @@ Search
 		si no es exitosa, se verifica si la busqueda en perfiles es exitosa, si es asi se presenta el resultado en buscar_perfil.html (carpeta templates)
 		si no es exitosa, se verifica si la busqueda en usuarios es exitosa, si es asi se presenta el resultado en buscar_usuario.html (carpeta templates)
 		si no es exitosa, se presenta un error generico en buscar_paginas.html (carpeta templates)
+
+# Carpetas y archivos
+media
+
+	Carpeta que contiene todas las imagenes que se integran a los registros de la BD
+
+
+paginas
+
+	Archivos
+
+		__init__.py
+		admin.py
+		apps.py
+		forms.py
+		models.py
+		urls.py
+		views.py
+
+		
+perfiles
+templates
+usuarios
