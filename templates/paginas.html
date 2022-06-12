@@ -1,33 +1,68 @@
 {% extends 'base.html' %}
-
-{% block titulo %}
-    Paginas
-{% endblock %}
-
 {% block contenido %}
-<h1 style="margin-left:30rem">Listado de Paginas</h1>
-<div class="container-fluid">
     {% for pagina in paginas %}
-        {% if forloop.counter0|divisibleby:4 %} 
-            <div class="row mb-5"> 
-        {%  endif %}
-                <div class="col-md-3">        
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{pagina.titulo}}</h5>
-                            <p class="card-text">{{pagina.fecha}}</p>
-                            <p class="card-text">{{pagina.copete}}</p>
-                            {% if pagina.imagen %}
-                                <p><img src="{{ pagina.imagen.url }}" alt="{{ pagina.imagen_epigrafe}}" style="width: 100%;"></p>
-                            {% endif %}
-                            <p class="card-text">{{pagina.habilitada}}</p>
-                            <a href="#" class="btn btn-primary">Ver</a>
-                        </div>
-                    </div>
+        <div class="entity_wrapper">
+            <div class="entity_title">
+                <h1><a href="single.html" target="_self">{{pagina.titulo}}</a>
+                </h1>
+            </div>
+            <!-- entity_title -->
+            <div class="entity_meta">
+                <!--<a href="#">10Aug- 2015</a>, by: <a href="#">Eric joan</a>-->
+                <a href="#">{{pagina.fecha}}</a>, by: <a href="#">Nombre del Autor</a>
+            </div>
+            <!-- entity_meta -->
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-full"></i>
+            </div>
+            <!-- rating -->
+            <div class="entity_social">
+                <a href="#" class="icons-sm sh-ic"><i class="fa fa-share-alt"></i><b>424</b>
+                    <span class="share_ic">Shares</span>
+                </a>
+                <a href="#" class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
+                <!--Twitter-->
+                <a href="#" class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
+                <!--Google +-->
+                <a href="#" class="icons-sm inst-ic"><i class="fa fa-google-plus"> </i></a>
+                <!--Linkedin-->
+                <a href="#" class="icons-sm tmb-ic"><i class="fa fa-ge"> </i></a>
+                <!--Pinterest-->
+                <a href="#" class="icons-sm rss-ic"><i class="fa fa-rss"> </i></a>
+                <span class="arrow">&raquo;</span>
+            </div>
+            <!-- entity_social -->
+            {% if pagina.imagen %}
+                <div class="entity_thumb">
+                    <img class="img-responsive" src="{{ pagina.imagen.url }}" alt="{{ pagina.imagen_epigrafe}}">
                 </div>
-        {% if forloop.counter|divisibleby:4 or forloop.last %}
-            </div><!-- row closing -->
-        {% endif %}
+                <!-- entity_thumb -->
+            {% endif %}
+            <div class="entity_content">
+                <p>{{pagina.copete}}</p>
+            </div>
+            <!-- entity_content -->
+        </div>
+        <!-- entity_wrapper -->
     {% endfor %}
-</div>
+
+    <nav aria-label="Page navigation" class="pagination_section">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next" class="active"> <span aria-hidden="true">&raquo;</span> </a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}
