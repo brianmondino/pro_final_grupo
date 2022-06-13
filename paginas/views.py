@@ -9,7 +9,7 @@ from usuarios.models import Usuarios
 
 # Create your views here.       
 def listar_paginas(request):
-    paginas = Paginas.objects.all()
+    paginas = Paginas.objects.order_by('-fecha')
     context = {'paginas':paginas}
     return render(request, 'paginas.html', context=context)
 
