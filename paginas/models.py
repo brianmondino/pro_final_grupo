@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Paginas(models.Model):
     titulo = models.CharField(max_length=100)
+    autor = models.ForeignKey(Users, on_delete=models.CASCADE)
     fecha = models.DateTimeField()
     copete = models.CharField(max_length=500)
     cuerpo = RichTextField(blank=True, null=True)
