@@ -38,6 +38,7 @@ BASE_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap_modal_forms',
 ]
 
 MY_APPS = [
@@ -47,7 +48,8 @@ MY_APPS = [
 ]
 
 THIRD_APPS = [
-    'ckeditor'
+    'ckeditor',
+    
 ]
 
 INSTALLED_APPS = BASE_APPS + MY_APPS + THIRD_APPS

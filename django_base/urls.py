@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django_base.views import index
+from django_base.views import index, login_view
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,5 +25,8 @@ urlpatterns = [
     path('paginas/', include('paginas.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('perfiles/', include('perfiles.urls')),
+
+    path('login/',login_view,name = 'login'),
+    #path('login/', views.CustomLoginView.as_view(), name='login'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
