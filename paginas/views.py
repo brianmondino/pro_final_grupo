@@ -3,6 +3,7 @@ from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
 
+
 from perfiles.models import Perfiles
 from usuarios.models import Usuarios
 
@@ -13,6 +14,18 @@ def listar_paginas(request):
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
+
+
+def detalle_pagina(request, pk):
+    try:
+        pagina = Paginas.objects.get(id=pk)
+        context = {'pagina':pagina}
+        return render(request, 'detalle_pagina.html', context=context)
+    except:
+        context = {'error':'El Producto no existe'}
+        return render(request, 'paginas.html', context=context)
+
+
 
 def crear_pagina(request):
     if request.method == 'GET':
@@ -41,6 +54,36 @@ def crear_pagina(request):
 
     else:
         return HttpResponse('Only GET and POST methods are allowed')
+
+def borrar_pagina(request, pk):
+    try:
+        if request.method == 'GET':
+            pagina = Paginas.objects.get(id=pk)
+            context = {'pagina':pagina}
+        else:
+            pagina = Paginas.objects.get(id=pk)
+            pagina.delete()
+            context = {'message':'Pagina eliminada correctamente'}
+        return render(request, 'borrar_pagina.html', context=context)
+    except:
+        context = {'error':'El Producto no existe'}
+        return render(request, 'borrar_pagina.html', context=context)
+
+
+def actualizar_pagina(request, pk):
+    try:
+        if request.method == 'GET':
+            pagina = Paginas.objects.get(id=pk)
+            context = {'pagina':pagina}
+        else:
+            pagina = Paginas.objects.get(id=pk)
+            pagina.update()
+            context = {'message':'La pagina ha sido actualizada'}
+        return render(request, 'actualizar_pagina.html', context=context)
+    except:
+        context = {'error':'Pagina NO actualizada'}
+        return render(request, 'actualizar_pagina.html', context=context)
+
 
 def buscar_pagina(request):
     palabra_busqueda = request.GET['buscar']
