@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% block titulo %}
-Login
+Registro
 {% endblock %}
 
 {% block contenido %}
-    <h2 style="margin-left:30rem">Iniciar sesion</h2>
+
+    <center><h2>Completa los campos para registrarte</h2></center>
+    {{errors}}
     <form action="" method="POST" style="margin-left:40rem;margin-top:7rem" enctype="multipart/form-data">
         {% csrf_token %}
         <table>

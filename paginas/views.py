@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from paginas.models import Paginas
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
-
 from perfiles.models import Perfiles
 from usuarios.models import Usuarios
 
@@ -14,29 +13,30 @@ def listar_paginas(request):
     return render(request, 'paginas.html', context=context)
 
 def crear_pagina(request):
-    if request.method == 'GET':
-        form = Pagina_form()
-        context = {'form':form}
-        return render(request, 'crear_pagina.html', context=context)
-    elif request.method == 'POST':        
-        form = Pagina_form(request.POST, request.FILES)
-        if form.is_valid():
-            nueva_pagina = Paginas.objects.create(
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            form = Pagina_form()
+            context = {'form':form}
+            return render(request, 'crear_pagina.html', context=context)
+        elif request.method == 'POST':        
+            form = Pagina_form(request.POST, request.FILES)
+            if form.is_valid():
+                nueva_pagina = Paginas.objects.create(
                 titulo = form.cleaned_data['titulo'],
                 fecha = form.cleaned_data['fecha'],
                 copete = form.cleaned_data['copete'],
                 cuerpo = form.cleaned_data['cuerpo'],
                 imagen = form.cleaned_data['imagen'], 
                 imagen_epigrafe = form.cleaned_data['imagen_epigrafe'],                
-                habilitada = form.cleaned_data['habilitada'],
-            )
-            context = {'nueva_pagina':nueva_pagina}
+                habilitada = form.cleaned_data['habilitada'],)
+                context = {'nueva_pagina':nueva_pagina}
+            else:
+                context = {'errors':form.errors}
+                return render(request, 'crear_pagina.html', context = context)
         else:
-            context = {'errors':form.errors}
-        return render(request, 'crear_pagina.html', context = context)
-
+            return HttpResponse('Only GET and POST methods are allowed')
     else:
-        return HttpResponse('Only GET and POST methods are allowed')
+        return redirect('login')
 
 def buscar_pagina(request):
     palabra_busqueda = request.GET['buscar']

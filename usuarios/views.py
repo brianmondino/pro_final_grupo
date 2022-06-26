@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from usuarios.models import Usuarios
 from usuarios.forms import Usuario_form
+from django.http import HttpResponse
 
 
 # Create your views here.       
