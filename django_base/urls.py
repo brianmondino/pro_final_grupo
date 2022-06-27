@@ -23,11 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = 'index'),
     path('paginas/', include('paginas.urls')),
-    path('usuarios/', include('usuarios.urls')),
+    #path('usuarios/', include('usuarios.urls')),
     path('perfiles/', include('perfiles.urls')),
     path('login/',login_view,name = 'login'),
     path('modal/',modal,name = 'modal'),
-    path('logout/',logout_view,name = 'logout'),
+    path('logout/',logout_view,name = 'logout_view'),
     path('register/',register_view,name = 'register'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,7 +16,6 @@ def login_view(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(username=username,password=password)
-
             if user is not None:
                 login(request, user)
                 paginas=Paginas.objects.all()
@@ -49,7 +48,8 @@ def register_view(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username,password=password)
             login(request,user)
-            context = {'message':'Usuario creado!'}
+            paginas=Paginas.objects.all()
+            context = {'message':'Usuario creado!','paginas':paginas}
             return render(request, 'index.html', context=context)
         else:
             error = form.errors.items

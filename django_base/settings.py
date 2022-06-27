@@ -42,7 +42,6 @@ BASE_APPS = [
 
 MY_APPS = [
     'paginas',
-    'usuarios',
     'perfiles',
 ]
 

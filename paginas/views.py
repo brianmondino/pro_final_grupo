@@ -3,7 +3,7 @@ from paginas.models import Paginas
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
 from perfiles.models import Perfiles
-from usuarios.models import Usuarios
+#from usuarios.models import Usuarios
 
 
 # Create your views here.       
