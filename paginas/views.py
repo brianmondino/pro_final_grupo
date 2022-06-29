@@ -17,10 +17,11 @@ def listar_paginas(request):
 def detalle_pagina(request, pk):
     try:
         pagina = Paginas.objects.get(id=pk)
-        context = {'pagina':pagina}
+        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+        context = {'pagina':pagina, 'secciones':secciones}
         return render(request, 'detalle_pagina.html', context=context)
     except:
-        context = {'error':'El Producto no existe'}
+        context = {'error':'La página no existe'}
         return render(request, 'paginas.html', context=context)
 
 @login_required
