@@ -85,8 +85,13 @@
 				<div class="col-md-4">
 					<div class="right_section">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Login</a></li>
-							<li><a href="#">Register</a></li>
+							{% if request.user.is_authenticated %}
+								<li> <img src=" {{ request.user.perfiles.image.url}}"> </li>
+								<li> <a href="/logout"><img src=" {{ request.user.perfiles.image.url}}"> user: {{request.user.username}} /Logout</a></li>
+							{% else %}
+								<li><a href="login">Login</a></li>
+								<li><a href="/register">Register</a></li>
+							{% endif %}
 							<li class="dropdown lang">
 								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
 										data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">En <i
@@ -107,11 +112,17 @@
 											<form role="form">
 												<!-- Input Group -->
 												<div class="input-group">
+<<<<<<< HEAD
+													<input type="text" class="form-control" placeholder="Type Something"> 
+													    <span class="input-group-btn"> <button type="submit" class="btn btn-primary">Search </button></span>
+												</div>
+=======
 													<input type="text" class="form-control" placeholder="Type Something"> <span class="input-group-btn">
 																			<button type="submit"
 																					class="btn btn-primary">Search
 																			</button>
 																		</span></div>
+>>>>>>> main
 											</form>
 										</div>
 									</li>
@@ -119,6 +130,7 @@
 							</li>
 						</ul>
 						<!-- Search Section -->
+
 					</div>
 					<!-- Right Header Section -->
 				</div>
@@ -145,7 +157,12 @@
 	<div class="widget_title widget_black">
 		<h2><a href="#">Popular News</a></h2>
 	</div>
-	<div class="media">
+
+	<!-- start feedwind code --> 
+	<script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Loading" data-fw-param="155498/"></script> 
+	<!-- end feedwind code -->
+
+{% comment %} 	<div class="media">
 		<div class="media-left">
 			<a href="#"><img class="media-object" src="{% static '/img/pop_right1.jpg' %}" alt="Generic placeholder image"></a>
 		</div>
@@ -223,7 +240,7 @@
 				</span>
 			</div>
 		</div>
-	</div>
+	</div> {% endcomment %}
 	<p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
 </div>
 <!-- Popular News -->

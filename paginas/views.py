@@ -2,10 +2,8 @@ from django.shortcuts import render
 from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
-
-
 from perfiles.models import Perfiles
-from usuarios.models import Usuarios
+#from usuarios.models import Usuarios
 
 
 # Create your views here.       
@@ -53,7 +51,7 @@ def crear_pagina(request):
         return render(request, 'crear_pagina.html', context = context)
 
     else:
-        return HttpResponse('Only GET and POST methods are allowed')
+        return redirect('login')
 
 def borrar_pagina(request, pk):
     try:

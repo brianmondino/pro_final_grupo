@@ -42,12 +42,12 @@ BASE_APPS = [
 
 MY_APPS = [
     'paginas',
-    'usuarios',
     'perfiles',
 ]
 
 THIRD_APPS = [
-    'ckeditor'
+    'ckeditor',
+    
 ]
 
 INSTALLED_APPS = BASE_APPS + MY_APPS + THIRD_APPS
@@ -140,3 +140,5 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# LOGIN_REDIRECT_URL = 'auth/logged_in'
+LOGIN_URL='/login/'
