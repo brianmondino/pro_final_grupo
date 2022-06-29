@@ -3,17 +3,17 @@ from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
 from perfiles.models import Perfiles
-#from usuarios.models import Usuarios
+from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.       
+# Create your views here.
+@login_required       
 def listar_paginas(request):
     paginas = Paginas.objects.order_by('-fecha')
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
 
-
+@login_required
 def detalle_pagina(request, pk):
     try:
         pagina = Paginas.objects.get(id=pk)
@@ -23,8 +23,7 @@ def detalle_pagina(request, pk):
         context = {'error':'El Producto no existe'}
         return render(request, 'paginas.html', context=context)
 
-
-
+@login_required
 def crear_pagina(request):
     if request.method == 'GET':
         form = Pagina_form()

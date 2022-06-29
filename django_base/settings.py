@@ -47,7 +47,7 @@ MY_APPS = [
 
 THIRD_APPS = [
     'ckeditor',
-    
+
 ]
 
 INSTALLED_APPS = BASE_APPS + MY_APPS + THIRD_APPS
