@@ -13,7 +13,7 @@ def listar_paginas(request):
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
 
-@login_required
+
 def detalle_pagina(request, pk):
     try:
         pagina = Paginas.objects.get(id=pk)
