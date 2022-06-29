@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from paginas.models import Paginas
+from paginas.models import Paginas,Secciones
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django_base.forms import Creacion_deUsuario
@@ -67,5 +67,6 @@ def register_view(request):
 
 def index(request):
     paginas = Paginas.objects.order_by('-fecha')
-    context = {'paginas':paginas}
-    return render(request, 'index.html', context=context)    
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'paginas':paginas, 'secciones':secciones}
+    return render(request, 'index.html', context=context)
