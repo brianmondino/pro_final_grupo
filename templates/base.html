@@ -89,7 +89,7 @@
 								<li> <img src=" {{ request.user.perfiles.image.url}}"> </li>
 								<li> <a href="/logout"><img src=" {{ request.user.perfiles.image.url}}"> user: {{request.user.username}} /Logout</a></li>
 							{% else %}
-								<li><a href="login">Login</a></li>
+								<li><a href="/login">Login</a></li>
 								<li><a href="/register">Register</a></li>
 							{% endif %}
 							<li class="dropdown lang">

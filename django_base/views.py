@@ -19,7 +19,8 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 paginas=Paginas.objects.all()
-                context = {'message': 'Bienvenido!!','paginas':paginas}
+                secciones=Secciones.objects.all()
+                context = {'message': 'Bienvenido!!','paginas':paginas,'secciones':secciones}
                 return render(request,'index.html',context = context)
             else:
                 context = {'error': 'Usuario no encontrado'}

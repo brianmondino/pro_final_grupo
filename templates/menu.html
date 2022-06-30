@@ -13,28 +13,34 @@
 						<ul class="nav navbar-nav main-nav">
 							<li class="active"><a href="/">Home</a></li>
 							{% for seccion in secciones %}
-							
 								<li><a href="category.html">{{seccion.nombre}}</a></li>
-
 							{% endfor %}
-							<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">More
-								<span><i class="fa fa-angle-down"></i></span></a>
-								<ul class="dropdown-menu">
-									<li>
-										<div class="m-menu-content">
-											<ul class="col-sm-6">
-												<li class="dropdown-header">Paginas</li>
-												<li><a href="/paginas/crear-pagina">Crear Página</a></li>
-											</ul>
-											<ul class="col-sm-6">
-												<li class="dropdown-header">Usuarios</li>
-												<li><a href="#">Listar Usuarios</a></li>
 
-											</ul>
-										</div>
-									</li>
-								</ul>
-							</li>
+							{% if request.user.is_authenticated %}
+							   	<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Mas
+									<span><i class="fa fa-angle-down"></i></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<div class="m-menu-content">
+												<ul class="col-sm-6">
+													<li class="dropdown-header">Paginas</li>
+													<li><a href="/paginas/crear-pagina">Crear Página</a></li>
+												</ul>
+												{% if request.user.is_staff %} 
+												<ul class="col-sm-6">
+													<li class="dropdown-header">Usuarios</li>
+													<li><a href="#">Listar Usuarios</a></li>
+													{% if request.user.is_superuser %} 
+														<li><a href="#">Crear Usuario</a></li>
+														<li><a href="#">Eliminar Usuario</a></li>
+													{% endif %}
+												</ul>											
+												{% endif %}
+											</div>
+										</li>
+									</ul>
+								</li>
+							{% endif %}
 						</ul>
 					</div>
 					<!-- .navbar-collapse -->
