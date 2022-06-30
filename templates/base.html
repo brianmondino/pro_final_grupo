@@ -89,7 +89,7 @@
 								<li> <img src=" {{ request.user.perfiles.image.url}}"> </li>
 								<li> <a href="/logout"><img src=" {{ request.user.perfiles.image.url}}"> user: {{request.user.username}} /Logout</a></li>
 							{% else %}
-								<li><a href="login">Login</a></li>
+								<li><a href="/login">Login</a></li>
 								<li><a href="/register">Register</a></li>
 							{% endif %}
 							<li class="dropdown lang">
@@ -235,22 +235,8 @@
 			</div>
 		</div>
 	</div> {% endcomment %}
-	<p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
 </div>
 <!-- Popular News -->
-
-<div class="widget hidden-xs m30">
-	<img class="img-responsive adv_img" src="{% static '/img/right_add1.jpg' %}" alt="add_one">
-	<img class="img-responsive adv_img" src="{% static '/img/right_add2.jpg' %}" alt="add_one">
-	<img class="img-responsive adv_img" src="{% static '/img/right_add3.jpg' %}" alt="add_one">
-	<img class="img-responsive adv_img" src="{% static '/img/right_add4.jpg' %}" alt="add_one">
-</div>
-<!-- Advertisement -->
-
-<div class="widget hidden-xs m30">
-	<img class="img-responsive widget_img" src="{% static '/img/right_add5.jpg' %}" alt="add_one">
-</div>
-<!-- Advertisement -->
 
 <div class="widget reviews m30">
 	<div class="widget_title widget_black">
@@ -319,79 +305,8 @@
 				<i class="fa fa-star-half-full"></i>
 			</span></div>
 	</div>
-	<p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
 </div>
 <!-- Reviews News -->
-
-<div class="widget hidden-xs m30">
-	<img class="img-responsive widget_img" src="{% static '/img/right_add6.jpg' %}" alt="add_one">
-</div>
-<!-- Advertisement -->
-
-<div class="widget m30">
-	<div class="widget_title widget_black">
-		<h2><a href="#">Most Commented</a></h2>
-	</div>
-	<div class="media">
-		<div class="media-left">
-			<a href="#"><img class="media-object" src="{% static '/img/pop_right1.jpg' %}" alt="Generic placeholder image"></a>
-		</div>
-		<div class="media-body">
-			<h3 class="media-heading">
-				<a href="single.html" target="_self">Yasaki camera launches new generic hi-speed shutter camera.</a>
-			</h3>
-
-			<div class="media_social">
-				<span><i class="fa fa-comments-o"></i><a href="#">4</a> Comments</span>
-			</div>
-		</div>
-	</div>
-	<div class="media">
-		<div class="media-left">
-			<a href="#"><img class="media-object" src="{% static '/img/pop_right2.jpg' %}" alt="Generic placeholder image"></a>
-		</div>
-		<div class="media-body">
-			<h3 class="media-heading">
-				<a href="single.html" target="_self">Samsung is the best mobile in the android market.</a>
-			</h3>
-
-			<div class="media_social">
-				<span><i class="fa fa-comments-o"></i><a href="#">4</a> Comments</span>
-			</div>
-		</div>
-	</div>
-	<div class="media">
-		<div class="media-left">
-			<a href="#"><img class="media-object" src="{% static '/img/pop_right3.jpg' %}" alt="Generic placeholder image"></a>
-		</div>
-		<div class="media-body">
-			<h3 class="media-heading">
-				<a href="single.html" target="_self">Apple launches photo-centric wrist watch for Android</a>
-			</h3>
-
-			<div class="media_social">
-				<span><i class="fa fa-comments-o"></i><a href="#">4</a> Comments</span>
-			</div>
-		</div>
-	</div>
-	<div class="media">
-		<div class="media-left">
-			<a href="#"><img class="media-object" src="{% static '/img/pop_right4.jpg' %}" alt="Generic placeholder image"></a>
-		</div>
-		<div class="media-body">
-			<h3 class="media-heading">
-				<a href="single.html" target="_self">DSLR is the most old camera at this time readmore about new
-					products</a>
-			</h3>
-
-			<div class="media_social">
-				<span><i class="fa fa-comments-o"></i><a href="#">4</a> Comments</span>
-			</div>
-		</div>
-	</div>
-	<p class="widget_divider"><a href="#" target="_self">More News&nbsp;&nbsp;&raquo; </a></p>
-</div>
-<!-- Most Commented News -->
 
 <div class="widget m30">
 	<div class="widget_title widget_black">
@@ -411,14 +326,6 @@
 </div>
 <!-- Editor News -->
 
-<div class="widget hidden-xs m30">
-	<img class="img-responsive add_img" src="{% static '/img/right_add7.jpg' %}" alt="add_one">
-	<img class="img-responsive add_img" src="{% static '/img/right_add7.jpg' %}" alt="add_one">
-	<img class="img-responsive add_img" src="{% static '/img/right_add7.jpg' %}" alt="add_one">
-	<img class="img-responsive add_img" src="{% static '/img/right_add7.jpg' %}" alt="add_one">
-</div>
-<!--Advertisement -->
-
 <div class="widget m30">
 	<div class="widget_title widget_black">
 		<h2><a href="#">Readers Corner</a></h2>
@@ -437,10 +344,6 @@
 </div>
 <!--  Readers Corner News -->
 
-<div class="widget hidden-xs m30">
-	<img class="img-responsive widget_img" src="{% static '/img/podcast.jpg' %}" alt="add_one">
-</div>
-<!--Advertisement-->
 </div>
 <!-- col-md-4 -->
 
@@ -452,27 +355,6 @@
 
 </section>
 <!-- entity_section -->
-
-<section id="subscribe_section" class="subscribe_section">
-	<div class="row">
-		<form action="#" method="post" class="form-horizontal">
-			<div class="form-group form-group-lg">
-				<label class="col-sm-6 control-label" for="formGroupInputLarge">
-					<h1><span class="red-color">Sign up</span> for the latest news</h1>
-				</label>
-
-				<div class="col-sm-3">
-					<input type="text" id="subscribe" name="subscribe" class="form-control input-lg">
-				</div>
-				<div class="col-sm-1">
-					<input type="submit" value="Sign Up" class="btn btn-large pink">
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-		</form>
-	</div>
-</section>
-<!-- Subscriber Section -->
 
 <section id="footer_section" class="footer_section">
 	<div class="container">

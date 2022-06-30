@@ -50,19 +50,27 @@
         <!-- entity_wrapper -->
     {% endfor %}
 
-    <nav aria-label="Page navigation" class="pagination_section">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next" class="active"> <span aria-hidden="true">&raquo;</span> </a>
-            </li>
-        </ul>
-    </nav>
+    {% if paginas.has_other_pages %}
+        <nav aria-label="Page navigation" class="pagination_section">
+            <ul class="pagination">
+                {% if paginas.has_previous %}
+                    <li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginas.paginator.page_range %}
+                    {% if paginas.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if paginas.has_next %}
+                    <li><a href="?page={{ paginas.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
 {% endblock %}

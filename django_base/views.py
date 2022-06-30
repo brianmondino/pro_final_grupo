@@ -5,6 +5,7 @@ from paginas.models import Paginas,Secciones
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django_base.forms import Creacion_deUsuario
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def modal(request):
     return render(request,'login/modal.html')
@@ -66,7 +67,21 @@ def register_view(request):
     
 
 def index(request):
-    paginas = Paginas.objects.order_by('-fecha')
+    paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'index.html', context=context)
+
+def index(request):
+    paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
+    pagina = request.GET.get('page', 1)
+    paginador = Paginator(paginas, 1)
+    try:
+        paginas = paginador.page(pagina)
+    except PageNotAnInteger:
+        paginas = paginador.page(1)
+    except EmptyPage:
+        paginas = paginador.page(paginador.num_pages)
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'paginas':paginas, 'secciones':secciones}
+    return render(request, 'paginas.html', context=context)

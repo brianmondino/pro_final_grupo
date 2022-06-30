@@ -4,11 +4,23 @@ from paginas.forms import Pagina_form
 from django.http import HttpResponse
 from perfiles.models import Perfiles
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
-@login_required       
-def listar_paginas(request):
-    paginas = Paginas.objects.order_by('-fecha')
+#@login_required       
+def listar_paginas(request, seccion=""):
+    if seccion == "":
+        paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
+    else:
+        paginas = Paginas.objects.filter(habilitada=True, secciones__id=seccion).order_by('-fecha')
+    pagina = request.GET.get('page', 1)
+    paginador = Paginator(paginas, 1)
+    try:
+        paginas = paginador.page(pagina)
+    except PageNotAnInteger:
+        paginas = paginador.page(1)
+    except EmptyPage:
+        paginas = paginador.page(paginador.num_pages)
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)

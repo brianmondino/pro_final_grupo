@@ -14,10 +14,10 @@
 							<li class="active"><a href="/">Home</a></li>
 							{% for seccion in secciones %}
 							
-								<li><a href="category.html">{{seccion.nombre}}</a></li>
+								<li><a href="/paginas/{{seccion.id}}">{{seccion.nombre}}</a></li>
 
 							{% endfor %}
-							<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">More
+							<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Más
 								<span><i class="fa fa-angle-down"></i></span></a>
 								<ul class="dropdown-menu">
 									<li>
