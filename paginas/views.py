@@ -29,6 +29,7 @@ def listar_paginas(request, seccion=""):
 def detalle_pagina(request, pk):
     try:
         pagina = Paginas.objects.get(id=pk)
+        pagina.valoracion = pagina.puntaje / pagina.votos
         secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
         context = {'pagina':pagina, 'secciones':secciones}
         return render(request, 'detalle_pagina.html', context=context)

@@ -12,11 +12,14 @@
         </div>
         <!-- entity_meta -->
         <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-full"></i>
+            {% for y in '12345'|make_list %}    <!-- pagina.valoracion = pagina.puntaje / pagina.votos-->
+                {% if forloop.counter <=  pagina.valoracion %}
+                <i class="fa fa-star"></i>
+                {% else %}
+                <i class="fa fa-star-o"></i>
+                {% endif %}
+            {% endfor %}
+            
         </div>
         <!-- rating -->
         {% if pagina.imagen %}
