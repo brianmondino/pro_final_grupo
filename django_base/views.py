@@ -20,8 +20,9 @@ def login_view(request):
             user = authenticate(username=username,password=password)
             if user is not None:
                 login(request, user)
-                paginas=Paginas.objects.all()
-                context = {'message': 'Bienvenido!!','paginas':paginas}
+                paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
+                secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+                context = {'paginas':paginas, 'secciones':secciones}
                 return render(request,'index.html',context = context)
             else:
                 context = {'error': 'Usuario no encontrado'}
@@ -58,20 +59,24 @@ def register_view(request):
             form = Creacion_deUsuario()
             context = {'errors':error,'form':form}
             return render(request,'login/register.html',context=context)
-
-
     else:
         form=Creacion_deUsuario()
         context = {'form':form}
         return render(request,'login/register.html',context=context)
-
     
-
-def index(request):
-    paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
-    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-    context = {'paginas':paginas, 'secciones':secciones}
-    return render(request, 'index.html', context=context)
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user) 
+            messages.success(request, 'Contraseña Actualizada')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Corrija el error que muestra debajo.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'login/change_password.html', {'form': form})
 
 def index(request):
     paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
@@ -88,16 +93,3 @@ def index(request):
     return render(request, 'paginas.html', context=context)
 
 
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user) 
-            messages.success(request, 'Contraseña Actualizada')
-            return redirect('change_password')
-        else:
-            messages.error(request, 'Corrija el error que muestra debajo.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'change_password.html', {'form': form})
