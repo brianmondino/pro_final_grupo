@@ -2,10 +2,11 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from paginas.models import Paginas,Secciones
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import authenticate,login,logout, update_session_auth_hash
 from django_base.forms import Creacion_deUsuario
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 def modal(request):
     return render(request,'login/modal.html')
@@ -85,3 +86,18 @@ def index(request):
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user) 
+            messages.success(request, 'Contraseña Actualizada')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Corrija el error que muestra debajo.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {'form': form})
