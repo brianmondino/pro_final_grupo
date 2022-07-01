@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns =[
     path('', listar_paginas, name = 'paginas'),
+    path('<int:seccion>/', listar_paginas, name = 'paginas'),
     path('crear-pagina/', crear_pagina, name = 'crear_pagina'),
     path('buscar-pagina/', buscar_pagina, name = 'buscar_pagina'),
     path('detalle-pagina/<int:pk>/', detalle_pagina, name = 'detalle_pagina'),

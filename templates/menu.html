@@ -13,11 +13,13 @@
 						<ul class="nav navbar-nav main-nav">
 							<li class="active"><a href="/">Home</a></li>
 							{% for seccion in secciones %}
-								<li><a href="category.html">{{seccion.nombre}}</a></li>
+							
+								<li><a href="/paginas/{{seccion.id}}">{{seccion.nombre}}</a></li>
+
 							{% endfor %}
 
 							{% if request.user.is_authenticated %}
-							   	<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Mas
+								<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Mas
 									<span><i class="fa fa-angle-down"></i></span></a>
 									<ul class="dropdown-menu">
 										<li>
@@ -31,10 +33,10 @@
 													<li class="dropdown-header">Usuarios</li>
 													<li><a href="#">Listar Usuarios</a></li>
 													{% if request.user.is_superuser %} 
-														<li><a href="#">Crear Usuario</a></li>
+														<li><a href="">Editar Usuario</a></li>
 														<li><a href="#">Eliminar Usuario</a></li>
 													{% endif %}
-												</ul>											
+												</ul>																							
 												{% endif %}
 											</div>
 										</li>

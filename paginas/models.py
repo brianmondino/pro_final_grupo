@@ -25,7 +25,6 @@ class Paginas(models.Model):
     habilitada = models.BooleanField(default=False)
     votos = models.IntegerField(default=0)
     puntaje = models.IntegerField(default=0)
-    puntaje_promedio = models.DecimalField(default=0, max_digits=3, decimal_places=2)
     tstamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:

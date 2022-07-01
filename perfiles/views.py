@@ -22,9 +22,7 @@ def crear_perfil(request):
         form = Perfil_form(request.POST, request.FILES)
         if form.is_valid():
             nuevo_perfil = Perfiles.objects.create(
-                nombre = form.cleaned_data['nombre'],
-                apellidos = form.cleaned_data['apellidos'],
-                habilitado = form.cleaned_data['habilitado'],
+                telefono = form.cleaned_data['telefono'],
                 tipo = form.cleaned_data['tipo'],
                 imagen = form.cleaned_data['imagen'], 
             )
@@ -34,4 +32,4 @@ def crear_perfil(request):
         return render(request, 'crear_perfil.html', context = context)
 
     else:
-        return HttpResponse('Only GET and POST methods are allowed')
+        return HttpResponse('Solo se permiten los metodos POST y GET')
