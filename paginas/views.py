@@ -40,6 +40,7 @@ def detalle_pagina(request, pk):
 def valorar_pagina(request):
     puntaje=request.POST.get('puntaje')
     id=request.POST.get('id')
+    
     print(puntaje, id)
     return JsonResponse({'texto': 'Su valoracion fue recibida. Muchas gracias.'})
 
