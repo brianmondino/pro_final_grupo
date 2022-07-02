@@ -96,3 +96,18 @@ $(function () {
 $(document).on('click', '.m-menu .dropdown-menu', function (e) {
     e.stopPropagation()
 })
+
+$(".rating a").on('click', function(e){
+    let valor = $(this).data('value');
+    let id = $(this).data('id');
+    //alert(valor);
+    //alert(id);
+    $.ajax({
+        url: "/paginas/valorar-pagina/",
+        type: 'POST',
+        data: {'puntaje': valor, 'id': id, csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+        success: function (respuesta){
+         alert(respuesta.texto)
+        }
+    })
+});

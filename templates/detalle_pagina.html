@@ -12,14 +12,16 @@
         </div>
         <!-- entity_meta -->
         <div class="rating">
-            {% for y in '12345'|make_list %}    <!-- pagina.valoracion = pagina.puntaje / pagina.votos-->
-                {% if forloop.counter <=  pagina.valoracion %}
-                <i class="fa fa-star"></i>
-                {% else %}
-                <i class="fa fa-star-o"></i>
-                {% endif %}
-            {% endfor %}
-            
+            <form method="POST" action="{{ request.path }}" class="ajax">
+                {% csrf_token %}
+                {% for y in '12345'|make_list %}    <!-- pagina.valoracion = pagina.puntaje / pagina.votos-->
+                    {% if forloop.counter <=  pagina.valoracion %}
+                        <a href="#{{forloop.counter}}" title="Valorar {{forloop.counter}} estrellas" data-value="{{forloop.counter}}" data-id="{{pagina.id}}"><i class="fa fa-star"></i></a>
+                    {% else %}
+                        <a href="#{{forloop.counter}}" title="Valorar {{forloop.counter}} estrellas" data-value="{{forloop.counter}}" data-id="{{pagina.id}}"><i class="fa fa-star-o"></i></a>
+                    {% endif %}
+                {% endfor %}
+            </form>
         </div>
         <!-- rating -->
         {% if pagina.imagen %}

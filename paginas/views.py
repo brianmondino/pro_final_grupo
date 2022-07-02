@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from perfiles.models import Perfiles
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -27,15 +27,22 @@ def listar_paginas(request, seccion=""):
 
 
 def detalle_pagina(request, pk):
-    try:
-        pagina = Paginas.objects.get(id=pk)
-        pagina.valoracion = pagina.puntaje / pagina.votos
-        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-        context = {'pagina':pagina, 'secciones':secciones}
-        return render(request, 'detalle_pagina.html', context=context)
-    except:
-        context = {'error':'La página no existe'}
-        return render(request, 'paginas.html', context=context)
+        try:
+            pagina = Paginas.objects.get(id=pk)
+            pagina.valoracion = pagina.puntaje / pagina.votos
+            secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+            context = {'pagina':pagina, 'secciones':secciones}
+            return render(request, 'detalle_pagina.html', context=context)
+        except:
+            context = {'error':'La página no existe'}
+            return render(request, 'paginas.html', context=context)
+
+def valorar_pagina(request):
+    puntaje=request.POST.get('puntaje')
+    id=request.POST.get('id')
+    print(puntaje, id)
+    return JsonResponse({'texto': 'Su valoracion fue recibida. Muchas gracias.'})
+
 
 @login_required
 def crear_pagina(request):
