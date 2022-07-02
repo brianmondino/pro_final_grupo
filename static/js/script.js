@@ -99,7 +99,7 @@ $(document).on('click', '.m-menu .dropdown-menu', function (e) {
 
 $(".rating a").on('click', function(e){
     let valor = $(this).data('value');
-    let id = $(this).data('id');
+    let id = $("#pagina_id").val();
     //alert(valor);
     //alert(id);
     $.ajax({
