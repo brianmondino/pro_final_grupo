@@ -85,7 +85,6 @@
 				
 				<div class="col-md-4">
 					<div class="right_section">
-
 						<ul class="nav navbar-nav">
 							{% if request.user.is_authenticated %}								
 								<li><a href="change_password">Cambiar Pass</a></li>
@@ -143,12 +142,53 @@
 <section id="entity_section" class="entity_section">
 <div class="container">
 <div class="row">
+
 <div class="col-md-8">
 	{% block contenido %}
+	
 	{% endblock %}
 </div>
 <!-- col-md-8 -->
+{% include "noticias.html" %}
 
+    
+    <!-- jquery Core-->
+    <script src="{% static '/js/jquery-2.1.4.min.js' %}"></script>
+    
+    <!-- Bootstrap -->
+    <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    
+    <!-- Theme Menu -->
+    <script src="{% static '/js/mobile-menu.js' %}"></script>
+    
+    <!-- Owl carousel -->
+    <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+    
+    <!-- Theme Script -->
+    <script src="{% static '/js/script.js' %}"></script>
+
+
+
+	<div id="ventana_modal" class="modal fade" role="dialog"></div>
+    <script>
+        function abrir_modal(url)
+        {
+            $('#ventana_modal').load(url, function()
+            {
+            $(this).modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $(this).modal('show');
+            });
+            return false;
+        }
+        function cerrar_modal()
+        {
+        $('#ventana_modal').modal('hide');
+        return false;
+        }
+    </script>
 
 </body>
 

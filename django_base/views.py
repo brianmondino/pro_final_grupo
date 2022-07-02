@@ -92,5 +92,3 @@ def index(request):
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
-
-
