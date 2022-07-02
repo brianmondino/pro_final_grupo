@@ -4,8 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Perfiles(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='perfiles')
-    nombre = models.CharField(max_length=40)
-    apellidos = models.CharField(max_length=80,default="")
+    telefono = models.CharField(max_length=13,blank=True)
     tipo = models.CharField(max_length=15,blank=True)
     imagen = models.ImageField(upload_to='imagenes', blank=True)
     class Meta:

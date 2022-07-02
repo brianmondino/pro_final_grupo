@@ -20,9 +20,9 @@ def login_view(request):
             user = authenticate(username=username,password=password)
             if user is not None:
                 login(request, user)
-                paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
-                secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-                context = {'paginas':paginas, 'secciones':secciones}
+                paginas=Paginas.objects.all()
+                secciones=Secciones.objects.all()
+                context = {'message': 'Bienvenido!!','paginas':paginas,'secciones':secciones}
                 return render(request,'index.html',context = context)
             else:
                 context = {'error': 'Usuario no encontrado'}
@@ -52,8 +52,9 @@ def register_view(request):
             user = authenticate(username=username,password=password)
             login(request,user)
             paginas=Paginas.objects.all()
-            context = {'message':'Usuario creado!','paginas':paginas}
-            return render(request, 'index.html', context=context)
+            secciones=Secciones.objects.all()
+            context = {'message': 'Bienvenido!!','paginas':paginas,'secciones':secciones}
+            return render(request,'index.html',context = context)
         else:
             error = form.errors.items
             form = Creacion_deUsuario()
@@ -91,5 +92,3 @@ def index(request):
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
-
-

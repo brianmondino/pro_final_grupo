@@ -17,31 +17,32 @@
 								<li><a href="/paginas/{{seccion.id}}">{{seccion.nombre}}</a></li>
 
 							{% endfor %}
+
 							{% if request.user.is_authenticated %}
-							<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Mas
-								<span><i class="fa fa-angle-down"></i></span></a>
-								<ul class="dropdown-menu">
-									<li>
-										<div class="m-menu-content">
-											<ul class="col-sm-6">
-												<li class="dropdown-header">Paginas</li>
-												<li><a href="/paginas/crear-pagina">Crear Página</a></li>
-											</ul>
-											{% if request.user.is_staff %} 
-											<ul class="col-sm-6">
-												<li class="dropdown-header">Usuarios</li>
-												<li><a href="#">Listar Usuarios</a></li>
-												{% if request.user.is_superuser %} 
-													<li><a href="">Editar Usuario</a></li>
-													<li><a href="#">Eliminar Usuario</a></li>
+								<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Mas
+									<span><i class="fa fa-angle-down"></i></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<div class="m-menu-content">
+												<ul class="col-sm-6">
+													<li class="dropdown-header">Paginas</li>
+													<li><a href="/paginas/crear-pagina">Crear Página</a></li>
+												</ul>
+												{% if request.user.is_staff %} 
+												<ul class="col-sm-6">
+													<li class="dropdown-header">Usuarios</li>
+													<li><a href="#">Listar Usuarios</a></li>
+													{% if request.user.is_superuser %} 
+														<li><a href="">Editar Usuario</a></li>
+														<li><a href="#">Eliminar Usuario</a></li>
+													{% endif %}
+												</ul>																							
 												{% endif %}
-											</ul>																							
-											{% endif %}
-										</div>
-									</li>
-								</ul>
-							</li>
-						{% endif %}
+											</div>
+										</li>
+									</ul>
+								</li>
+							{% endif %}
 						</ul>
 					</div>
 					<!-- .navbar-collapse -->

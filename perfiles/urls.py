@@ -1,5 +1,4 @@
 from django.urls import path
-
 from perfiles.views import listar_perfiles, crear_perfil
 
 urlpatterns =[

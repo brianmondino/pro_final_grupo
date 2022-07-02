@@ -28,7 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = 'index'),
     path('paginas/', include('paginas.urls')),
-    #path('usuarios/', include('usuarios.urls')),
     path('perfiles/', include('perfiles.urls')),
     path('login/',login_view,name = 'login'),
     path('modal/',modal,name = 'modal'),
