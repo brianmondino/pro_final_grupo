@@ -7,14 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>TechNews - HTML and CSS Template</title>
 
-	<!-- favicon -->
-	<link href="{% static '/img/favicon.png' %}" rel=icon>
 
-	<!-- web-fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
-
-	<!-- Bootstrap -->
-	<link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
 
 	<!-- font-awesome -->
 	<link href="{% static '/fonts/font-awesome/font-awesome.min.css' %}" rel="stylesheet">
@@ -36,6 +29,7 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar">
+	{% include "user/login.html" %}
 <div id="main-wrapper">
 <!-- Page Preloader -->
 <div id="preloader">
@@ -88,11 +82,27 @@
 						<ul class="nav navbar-nav">
 							{% if request.user.is_authenticated %}								
 								<li><a href="change_password">Cambiar Pass</a></li>
-								<li><img src={{ request.user.perfiles.imagen.url }} style="height: 4rem;"></li>
-								<li> <a href="/logout">user: {{request.user.username}} /Logout</a></li>
+								<li>
+									<a href={% url 'users:profile' %}>
+										<img src={{ user.profile_pic.url }} class="rounded-circle" height="30" width='30' alt="" loading="lazy" />
+									</a>
+								</li>
+								<!-- <li><img src={{ request.user.perfiles.imagen.url }} style="height: 4rem;"></li>
+								<li> <a href="/logout">user: {{request.user.username}} /Logout</a></li> -->
 							{% else %}
-								<li><a href="/login">Login</a></li>
+								<li>
+									<button type="button" class="btn btn-primary" data-mdb-toggle='modal' data-mdb-target='#loginModal'>
+										Iniciar Sesión
+									</button>
+								</li>
+
+								<!-- <li><a href="/login">Iniciar Sesion</a></li>
 								<li><a href="/register">Register</a></li>
+								<button type="button" class="btn btn-primary" data-mdb-toggle='modal' data-mdb-target='#loginModal'>
+									Iniciar Sesión
+								</button>							
+							
+							-->
 							{% endif %}
 							<li class="dropdown lang">
 								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
@@ -166,29 +176,6 @@
     
     <!-- Theme Script -->
     <script src="{% static '/js/script.js' %}"></script>
-
-
-
-	<div id="ventana_modal" class="modal fade" role="dialog"></div>
-    <script>
-        function abrir_modal(url)
-        {
-            $('#ventana_modal').load(url, function()
-            {
-            $(this).modal({
-                backdrop: 'static',
-                keyboard: false
-            })
-            $(this).modal('show');
-            });
-            return false;
-        }
-        function cerrar_modal()
-        {
-        $('#ventana_modal').modal('hide');
-        return false;
-        }
-    </script>
 
 </body>
 

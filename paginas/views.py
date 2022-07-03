@@ -2,7 +2,6 @@ from django.shortcuts import render
 from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse, JsonResponse
-from perfiles.models import Perfiles
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
