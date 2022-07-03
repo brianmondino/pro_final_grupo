@@ -111,3 +111,10 @@ $(".rating a").on('click', function(e){
         }
     })
 });
+
+$('#modal_login .save').click(function (e) {
+    e.preventDefault();
+    $('#modal_login').modal('hide');
+    //$(this).tab('show')
+    return false;
+})
