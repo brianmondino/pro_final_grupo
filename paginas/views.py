@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from perfiles.models import Perfiles
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import UpdateView
 
 # Create your views here.
 #@login_required       
@@ -65,10 +64,8 @@ def detail_view(request, pk):
     # dictionary for initial data with
     # field names as keys
     context ={}
-  
     # add the dictionary during initialization
     context["data"] = Paginas.objects.get(id = pk)
-          
     return render(request, "detail_view.html", context)
 
 # update view for details
@@ -76,13 +73,11 @@ def update_view(request, pk):
     obj = get_object_or_404(Paginas, id = pk)
     form = Pagina_form(request.POST or None, instance = obj)
     context = {'form':form}
-    form.save()
+    if form.is_valid():
+        form.save()
     return render(request, "update_view.html", context)
 
-#class update_view(UpdateView):
-    model = Paginas
-    template_name = 'update_view.html'
-    fields = '__all__'
+
 ################################################################
 
 @login_required
