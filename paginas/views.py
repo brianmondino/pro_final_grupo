@@ -52,25 +52,8 @@ def listar_paginas2(request): # borré seccion=""
 
 
 
-
-
-
-
-
-
-
-
-
-def detail_view(request, pk):
-    # dictionary for initial data with
-    # field names as keys
-    context ={}
-    # add the dictionary during initialization
-    context["data"] = Paginas.objects.get(id = pk)
-    return render(request, "detail_view.html", context)
-
 # update view for details
-def update_view(request, pk):
+def actualiza_vista(request, pk):
     obj = get_object_or_404(Paginas, id = pk)
     if request.method == "POST":
         form = Pagina_form(request.POST, request.FILES, instance = obj)
@@ -82,7 +65,7 @@ def update_view(request, pk):
         secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
         form = Pagina_form(instance = pagina)
         context = {'form':form,'id':pk, 'secciones':secciones}
-        return render(request, 'update_view.html',context)
+        return render(request, 'actualiza_vista.html',context)
 
 
 

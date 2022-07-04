@@ -87,7 +87,7 @@
 					<div class="right_section">
 						<ul class="nav navbar-nav">
 							{% if request.user.is_authenticated %}								
-								<li><a href="change_password">Cambiar Pass</a></li>
+								<li><a href="/login/cambiar-pass">Cambiar Pass</a></li>
 								<li><img src={{ request.user.perfiles.imagen.url }} style="height: 4rem;"></li>
 								<li> <a href="/logout">user: {{request.user.username}} /Logout</a></li>
 							{% else %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from paginas.views import listar_paginas, crear_pagina, buscar_pagina, detalle_pagina, borrar_pagina, listar_paginas2, update_view, detail_view
+from paginas.views import listar_paginas, crear_pagina, buscar_pagina, detalle_pagina, borrar_pagina, listar_paginas2, actualiza_vista
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -11,6 +11,6 @@ urlpatterns =[
     path('detalle-pagina/<int:pk>/', detalle_pagina, name = 'detalle_pagina'),
     path('borrar-pagina/<int:pk>/', borrar_pagina, name = 'borrar_pagina'),
     path('listar-paginas2/', listar_paginas2, name = 'listar_paginas2'),
-    path('update-view/<int:pk>/', update_view, name='update_view'),
-    path('<int:pk>/', detail_view ),
+    path('actualiza-vista/<int:pk>/', actualiza_vista, name='actualiza_vista'),
+
 ]
