@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
 from perfiles.models import Perfiles
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import UpdateView
 
 # Create your views here.
 #@login_required       
@@ -25,7 +26,6 @@ def listar_paginas(request, seccion=""):
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
 
-
 def detalle_pagina(request, pk):
     try:
         pagina = Paginas.objects.get(id=pk)
@@ -36,6 +36,52 @@ def detalle_pagina(request, pk):
     except:
         context = {'error':'La página no existe'}
         return render(request, 'paginas.html', context=context)
+
+###############################################################
+@login_required
+def listar_paginas2(request): # borré seccion=""
+    paginas = Paginas.objects.all # saque order_by('-fecha')
+    context = {'paginas':paginas}
+    return render(request, 'listar_paginas2.html', context=context)
+
+def detail_view(request, pk):
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+  
+    # add the dictionary during initialization
+    context["data"] = Paginas.objects.get(id = pk)
+          
+    return render(request, "detail_view.html", context)
+
+# update view for details
+# def update_view(request, pk):
+
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+    context["data"] = Paginas.objects.get(id = pk)
+    # fetch the object related to passed id
+    obj = get_object_or_404(Paginas, id = pk)
+ 
+    # pass the object as instance in form
+    form = Pagina_form(request.POST or None, instance = obj)
+    # save the data from the form and
+    # redirect to detail_view
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect("/"+pk)
+ 
+    # add form dictionary to context
+    context["form"] = form
+ 
+    return render(request, "update_view.html", context)
+
+class update_view(UpdateView):
+    model = Paginas
+    template_name = 'update_view.html'
+    fields = '__all__'
+################################################################
 
 @login_required
 def crear_pagina(request):
@@ -80,22 +126,6 @@ def borrar_pagina(request, pk):
         context = {'error':'El Producto no existe'}
         return render(request, 'borrar_pagina.html', context=context)
 
-
-def actualizar_pagina(request, pk):
-    try:
-        if request.method == 'GET':
-            pagina = Paginas.objects.get(id=pk)
-            context = {'pagina':pagina}
-        else:
-            pagina = Paginas.objects.get(id=pk)
-            pagina.update()
-            context = {'message':'La pagina ha sido actualizada'}
-        return render(request, 'actualizar_pagina.html', context=context)
-    except:
-        context = {'error':'Pagina NO actualizada'}
-        return render(request, 'actualizar_pagina.html', context=context)
-
-
 def buscar_pagina(request):
     palabra_busqueda = request.GET['buscar']
     paginas = Paginas.objects.filter(titulo__icontains = palabra_busqueda)
@@ -109,3 +139,5 @@ def buscar_pagina(request):
     else:
         context = {'errors':'No se encontro el valor correcto'}
     return render(request, 'buscar_paginas.html', context = context)
+
+
