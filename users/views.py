@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from platformdirs import user_cache_path
+#from platformdirs import user_cache_path
 
 from users.models import UserProfile
 
