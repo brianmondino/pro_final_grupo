@@ -14,7 +14,7 @@ def listar_paginas(request, seccion=""):
     else:
         paginas = Paginas.objects.filter(habilitada=True, secciones__id=seccion).order_by('-fecha')
     pagina = request.GET.get('page', 1)
-    paginador = Paginator(paginas, 1)
+    paginador = Paginator(paginas, 4)
     try:
         paginas = paginador.page(pagina)
     except PageNotAnInteger:

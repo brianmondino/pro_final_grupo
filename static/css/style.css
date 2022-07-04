@@ -1660,7 +1660,7 @@ section {
 .footer_widget_title h3:after {
     display: table;
     position: relative;
-    left: 115px;
+    left: 150px;
     bottom: 10px;
     height: 2px;
     content: " ";
