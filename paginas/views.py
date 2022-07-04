@@ -44,6 +44,23 @@ def listar_paginas2(request): # borré seccion=""
     context = {'paginas':paginas}
     return render(request, 'listar_paginas2.html', context=context)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def detail_view(request, pk):
     # dictionary for initial data with
     # field names as keys
@@ -55,29 +72,14 @@ def detail_view(request, pk):
     return render(request, "detail_view.html", context)
 
 # update view for details
-# def update_view(request, pk):
-
-    # dictionary for initial data with
-    # field names as keys
-    context ={}
-    context["data"] = Paginas.objects.get(id = pk)
-    # fetch the object related to passed id
+def update_view(request, pk):
     obj = get_object_or_404(Paginas, id = pk)
- 
-    # pass the object as instance in form
     form = Pagina_form(request.POST or None, instance = obj)
-    # save the data from the form and
-    # redirect to detail_view
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/"+pk)
- 
-    # add form dictionary to context
-    context["form"] = form
- 
+    context = {'form':form}
+    form.save()
     return render(request, "update_view.html", context)
 
-class update_view(UpdateView):
+#class update_view(UpdateView):
     model = Paginas
     template_name = 'update_view.html'
     fields = '__all__'

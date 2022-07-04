@@ -10,7 +10,7 @@
 </head>
 <body>
     {% for pagina in paginas %}
-    <h3><a href="/paginas/update-view/<int:pk>" target="_self">{{pagina.titulo}}</a>
+    <h3><a href="/paginas/update-view/{{pagina.id}}" target="_self">{{pagina.titulo}}</a>
     </h3>
     {% endfor%}
 </body>
