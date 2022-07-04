@@ -8,11 +8,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 #@login_required       
-def listar_paginas(request, seccion=""):
-    if seccion == "":
+def listar_paginas(request, seccion_id=""):
+    if seccion_id == "":
         paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
     else:
-        paginas = Paginas.objects.filter(habilitada=True, secciones__id=seccion).order_by('-fecha')
+        paginas = Paginas.objects.filter(habilitada=True, secciones__id=seccion_id).order_by('-fecha')
+        seccion = Secciones.objects.get(id=seccion_id)
     pagina = request.GET.get('page', 1)
     paginador = Paginator(paginas, 4)
     try:
@@ -22,7 +23,10 @@ def listar_paginas(request, seccion=""):
     except EmptyPage:
         paginas = paginador.page(paginador.num_pages)
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-    context = {'paginas':paginas, 'secciones':secciones}
+    if seccion_id == "":
+        context = {'paginas':paginas, 'secciones':secciones}
+    else:
+        context = {'paginas':paginas, 'secciones':secciones, 'seccion':seccion}
     return render(request, 'paginas.html', context=context)
 
 
