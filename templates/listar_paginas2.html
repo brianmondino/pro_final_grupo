@@ -1,0 +1,33 @@
+{% extends 'base_backoffice.html' %}
+{% block contenido %}
+<table width="100%" class="table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Votos</th>
+            <th>Puntaje</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pagina in paginas %}
+            <tr>
+                <td align="center">{{pagina.id}}</td>
+                <td>{{pagina.fecha}}</td>
+                <td>{{pagina.titulo}}</td>
+                <td>{{pagina.autor}}</td>
+                <td align="center">{{pagina.votos}}</td>
+                <td align="center">{{pagina.puntaje}}</td>
+                <td>
+                    <a href="/paginas/detalle-pagina/{{pagina.id}}" target="_self">Ver</a><br>
+                    <a href="/paginas/actualiza-vista/{{pagina.id}}" target="_self">Editar</a><br>
+                    <a href="/paginas/borrar-pagina/{{pagina.id}}" target="_self">Borrar</a><br>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>    
+{% endblock %}

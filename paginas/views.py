@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse, JsonResponse
@@ -29,17 +29,19 @@ def listar_paginas(request, seccion_id=""):
         context = {'paginas':paginas, 'secciones':secciones, 'seccion':seccion}
     return render(request, 'paginas.html', context=context)
 
-
 def detalle_pagina(request, pk):
-        try:
-            pagina = Paginas.objects.get(id=pk)
+    try:
+        pagina = Paginas.objects.get(id=pk)
+        if pagina.votos > 0:
             pagina.valoracion = pagina.puntaje / pagina.votos
-            secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-            context = {'pagina':pagina, 'secciones':secciones}
-            return render(request, 'detalle_pagina.html', context=context)
-        except:
-            context = {'error':'La página no existe'}
-            return render(request, 'paginas.html', context=context)
+        else: 
+            pagina.valoracion = 0
+        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+        context = {'pagina':pagina, 'secciones':secciones}
+        return render(request, 'detalle_pagina.html', context=context)
+    except:
+        context = {'error':'La página no existe'}
+        return render(request, 'paginas.html', context=context)
 
 def valorar_pagina(request):
     puntaje=request.POST.get('puntaje')
@@ -55,6 +57,37 @@ def valorar_pagina(request):
     print(puntaje, id)
     return JsonResponse({'texto': 'Su valoracion fue recibida. Muchas gracias.'})
 
+
+
+###############################################################
+@login_required
+def listar_paginas2(request): # borré seccion=""
+    paginas = Paginas.objects.all # saque order_by('-fecha')
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'paginas':paginas, 'secciones':secciones}
+    return render(request, 'listar_paginas2.html', context=context)
+
+
+
+# update view for details
+def actualiza_vista(request, pk):
+    obj = get_object_or_404(Paginas, id = pk)
+    if request.method == "POST":
+        form = Pagina_form(request.POST, request.FILES, instance = obj)
+        if form.is_valid():
+            form.save()
+            return redirect("/paginas/listar-paginas2/")
+    else:
+        pagina = Paginas.objects.get(id=pk)
+        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+        form = Pagina_form(instance = pagina)
+        context = {'form':form,'id':pk, 'secciones':secciones}
+        return render(request, 'actualiza_vista.html',context)
+
+
+
+
+################################################################
 
 @login_required
 def crear_pagina(request):
@@ -90,30 +123,18 @@ def borrar_pagina(request, pk):
         if request.method == 'GET':
             pagina = Paginas.objects.get(id=pk)
             context = {'pagina':pagina}
+            return render(request, 'borrar_pagina.html', context=context)
         else:
             pagina = Paginas.objects.get(id=pk)
             pagina.delete()
-            context = {'message':'Pagina eliminada correctamente'}
-        return render(request, 'borrar_pagina.html', context=context)
+            paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
+            secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+            context = {'paginas':paginas, 'secciones':secciones}
+            return render(request, 'listar_paginas2.html', context=context)
+        
     except:
         context = {'error':'El Producto no existe'}
         return render(request, 'borrar_pagina.html', context=context)
-
-
-def actualizar_pagina(request, pk):
-    try:
-        if request.method == 'GET':
-            pagina = Paginas.objects.get(id=pk)
-            context = {'pagina':pagina}
-        else:
-            pagina = Paginas.objects.get(id=pk)
-            pagina.update()
-            context = {'message':'La pagina ha sido actualizada'}
-        return render(request, 'actualizar_pagina.html', context=context)
-    except:
-        context = {'error':'Pagina NO actualizada'}
-        return render(request, 'actualizar_pagina.html', context=context)
-
 
 def buscar_pagina(request):
     palabra_busqueda = request.GET['buscar']
@@ -128,3 +149,5 @@ def buscar_pagina(request):
     else:
         context = {'errors':'No se encontro el valor correcto'}
     return render(request, 'buscar_paginas.html', context = context)
+
+

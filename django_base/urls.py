@@ -16,7 +16,7 @@ Including another URLconf
 from django import views
 from django.contrib import admin
 from django.urls import path, include
-from django_base.views import index,login_view,logout_view,register_view,modal, change_password
+from django_base.views import index,login_view,logout_view,register_view,modal, cambiar_pass
 from django.conf import settings
 from django.conf.urls.static import static
 #from django.conf.urls import url
@@ -33,6 +33,6 @@ urlpatterns = [
     path('modal/',modal,name = 'modal'),
     path('logout/',logout_view,name = 'logout_view'),
     path('register/',register_view,name = 'register'),
-    path('login/change_password/', change_password, name='change_password'),
+    path('login/cambiar-pass/', cambiar_pass, name='cambiar_pass'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

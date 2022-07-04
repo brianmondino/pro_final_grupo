@@ -78,15 +78,22 @@
 				</div>
 				<div class="col-md-4">
 					<div class="logo">
-						<a href="index.html"><img src="{% static '/img/logo.png' %}" alt="Tech NewsLogo"></a>
+						<a href="/"><img src="{% static '/img/logo.png' %}" alt="Tech NewsLogo"></a>
 					</div>
 					<!-- Logo Section -->
 				</div>
+				
 				<div class="col-md-4">
 					<div class="right_section">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Login</a></li>
-							<li><a href="#">Register</a></li>
+							{% if request.user.is_authenticated %}								
+								<li><a href="change_password">Cambiar Pass</a></li>
+								<li><img src={{ request.user.perfiles.imagen.url }} style="height: 4rem;"></li>
+								<li> <a href="/logout">user: {{request.user.username}} /Logout</a></li>
+							{% else %}
+								<li><a href="/login">Login</a></li>
+								<li><a href="/register">Register</a></li>
+							{% endif %}
 							<li class="dropdown lang">
 								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
 										data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">En <i
@@ -107,8 +114,7 @@
 											<form role="form">
 												<!-- Input Group -->
 												<div class="input-group">
-													<input type="text" class="form-control"
-														   placeholder="Type Something"> <span class="input-group-btn">
+													<input type="text" class="form-control" placeholder="Type Something"> <span class="input-group-btn">
 																			<button type="submit"
 																					class="btn btn-primary">Search
 																			</button>
@@ -120,15 +126,14 @@
 							</li>
 						</ul>
 						<!-- Search Section -->
+
 					</div>
 					<!-- Right Header Section -->
 				</div>
 			</div>
 		</div>
 		<!-- Header Section -->
-
 		{% include "menu.html" with secciones=secciones%}
-		<!-- .navigation-section -->
 	</div>
 	<!-- .container -->
 </section>
@@ -137,20 +142,30 @@
 <section id="entity_section" class="entity_section">
 <div class="container">
 <div class="row">
+
 <div class="col-md-12">
 	{% block contenido %}
+	
 	{% endblock %}
 </div>
-<!-- col-md-8 -->
 
-</div>
-<!-- row -->
+    
+    <!-- jquery Core-->
+    <script src="{% static '/js/jquery-2.1.4.min.js' %}"></script>
+    
+    <!-- Bootstrap -->
+    <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    
+    <!-- Theme Menu -->
+    <script src="{% static '/js/mobile-menu.js' %}"></script>
+    
+    <!-- Owl carousel -->
+    <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+    
+    <!-- Theme Script -->
+    <script src="{% static '/js/script.js' %}"></script>
 
-</div>
-<!-- container -->
 
-</section>
-<!-- entity_section -->
 
 <section id="footer_section" class="footer_section">
 	<div class="container">
