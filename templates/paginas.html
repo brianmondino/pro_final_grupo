@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+    {% if seccion.nombre %}
+        <h1>Sección {{seccion.nombre}}:</h1>
+    {% endif %}
     {% for pagina in paginas %}
         <div class="entity_wrapper">
             <div class="entity_title">
