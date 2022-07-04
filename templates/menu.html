@@ -31,8 +31,8 @@
 												</ul>
 												{% if request.user.is_staff %} 
 												<ul class="col-sm-6">
-													<li class="dropdown-header">Usuarios</li>
-													<li><a href="#">Listar Usuarios</a></li>
+													<li class="dropdown-header">Usuarios</li>													
+													<li><a href={% url 'users:list' %}>Listar Usuarios</a></li>
 													{% if request.user.is_superuser %} 
 														<li><a href="">Editar Usuario</a></li>
 														<li><a href="#">Eliminar Usuario</a></li>

@@ -1,13 +1,13 @@
 from django.urls import path
-from paginas.views import actualizar_pagina, listar_paginas, crear_pagina, buscar_pagina, detalle_pagina, borrar_pagina, valorar_pagina
+from paginas.views import actualizar_pagina, listar_paginas2, crear_pagina, buscar_pagina, detalle_pagina, borrar_pagina, valorar_pagina
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns =[
-    path('', listar_paginas, name = 'paginas'),
-    path('<int:seccion>/', listar_paginas, name = 'paginas'),
+    #path('', listar_paginas, name = 'paginas'),
+    #path('<int:seccion>/', listar_paginas, name = 'paginas'),
     path('crear-pagina/', crear_pagina, name = 'crear_pagina'),
-    path('litar-pagina/', crear_pagina, name = 'crear_pagina'),
+    path('listar-paginas2/', listar_paginas2, name = 'listar_paginas2'),
     path('buscar-pagina/', buscar_pagina, name = 'buscar_pagina'),
     path('detalle-pagina/<int:pk>/', detalle_pagina, name = 'detalle_pagina'),
     path('borrar-pagina/<int:pk>/', borrar_pagina, name = 'borrar_pagina'),

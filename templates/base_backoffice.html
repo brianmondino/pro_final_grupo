@@ -36,6 +36,8 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar">
+	{% include "user/login.html" %}
+	{% include "user/change_password.html" %}	
 <div id="main-wrapper">
 <!-- Page Preloader -->
 <div id="preloader">
@@ -85,16 +87,24 @@
 				<div class="col-md-4">
 					<div class="right_section">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Login</a></li>
-							<li><a href="#">Register</a></li>
-							<li class="dropdown lang">
-								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">En <i
-										class="fa fa-angle-down"></i></button>
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-									<li><a href="#">Bn</a></li>
-								</ul>
-							</li>
+							{% if request.user.is_authenticated %}
+								<button type="button"
+										class="btn btn-secondary btn-lg" 
+										data-toggle="modal"
+										style="text-align:center;" 
+										data-target="#modal_change">CAMBIAR CONTRASEÑA<br>{{ user.first_name }}
+								</button>											 											
+								<a href={% url 'users:profile' %}>
+									<img src={{ user.profile_pic.url }} class="rounded" height="40" width='40' alt="" loading="lazy" />
+								</a>
+							{% else %}
+								<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_login">Iniciar Sesion / Registrarse</button>
+								{% for message in messages %}
+								<!-- <div class="alert alert-{{message.tags}} alert-dismissible fade show" role='alert'> -->
+									<br>{{ message }}
+								<!-- </div> -->
+								{% endfor %}											
+							{% endif %}
 						</ul>
 						<!-- Language Section -->
 

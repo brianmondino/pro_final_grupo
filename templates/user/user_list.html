@@ -1,0 +1,16 @@
+{% extends 'base_backoffice.html' %}
+{% block contenido %}
+    {% for user in users %}
+        <div class="card" style="width: 25rem;">
+            {% if user.profile_pic %}
+                <img src="{{user.profile_pic.url}}" class="card-img-top" height="60" width='60' alt="" loading="lazy" >
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{user.email}}</h5>
+                <p class="card-text">{{user.first_name}} {{user.last_name}} </p>
+                <p class="card-text">{{user.bio}}</p>
+                <a href="#" class="btn btn-primary">Ver mas!</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

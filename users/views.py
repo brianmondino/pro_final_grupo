@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from platformdirs import user_cache_path
+
+from users.models import UserProfile
 
 from .forms import UserLoginForm, UserSignUpForm, UserChangePassword
 
@@ -79,6 +82,12 @@ def logout_view(request):
 @login_required(login_url='index')
 def profile_view(request):
     return render(request, 'user/profile.html')
+
+@login_required(login_url='index')
+def user_list(request): 
+    usuarios = UserProfile.objects.all
+    context = {'users':usuarios}
+    return render(request,'user/user_list.html',context=context)    
 
 
 def user_detail(request, slug):
