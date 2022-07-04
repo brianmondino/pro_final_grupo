@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
 from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse
@@ -40,7 +40,8 @@ def detalle_pagina(request, pk):
 @login_required
 def listar_paginas2(request): # borré seccion=""
     paginas = Paginas.objects.all # saque order_by('-fecha')
-    context = {'paginas':paginas}
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'listar_paginas2.html', context=context)
 
 
@@ -71,12 +72,19 @@ def detail_view(request, pk):
 # update view for details
 def update_view(request, pk):
     obj = get_object_or_404(Paginas, id = pk)
-    form = Pagina_form(request.POST or None, instance = obj)
-    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-    context = {'form':form, 'secciones':secciones}
-    if form.is_valid():
-        form.save()
-    return render(request, "update_view.html", context)
+    if request.method == "POST":
+        form = Pagina_form(request.POST, request.FILES, instance = obj)
+        if form.is_valid():
+            form.save()
+            return redirect("/paginas/listar-paginas2/")
+    else:
+        pagina = Paginas.objects.get(id=pk)
+        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+        form = Pagina_form(instance = pagina)
+        context = {'form':form,'id':pk, 'secciones':secciones}
+        return render(request, 'update_view.html',context)
+
+
 
 
 ################################################################
