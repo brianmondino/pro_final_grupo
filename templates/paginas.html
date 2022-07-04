@@ -2,7 +2,7 @@
 
 {% block contenido %}
     {% if seccion.nombre %}
-        <h1>Sección {{seccion.nombre}}:</h1>
+        <h1 style="color: blue;"">Sección {{seccion.nombre}}:</h1>
     {% endif %}
     {% for pagina in paginas %}
         <div class="entity_wrapper">
@@ -13,7 +13,7 @@
             <!-- entity_title -->
             <div class="entity_meta">
                 <!--<a href="#">10Aug- 2015</a>, by: <a href="#">Eric joan</a>-->
-                <a href="#">{{pagina.fecha}}</a>, by: <a href="#">{{pagina.autor}}</a>
+                {{pagina.fecha}}, by: <a href="#">{{pagina.autor}}</a>
             </div>
             <!-- entity_meta -->
             <div class="rating">
