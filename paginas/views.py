@@ -24,6 +24,13 @@ def listar_paginas(request, seccion=""):
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
 
+@login_required
+def listar_paginas2(request): # borré seccion=""
+    paginas = Paginas.objects.all # saque order_by('-fecha')
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'paginas':paginas, 'secciones':secciones}
+    return render(request, 'listar_paginas2.html', context=context)    
+
 
 def detalle_pagina(request, pk):
         try:
