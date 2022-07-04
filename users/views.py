@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import UserLoginForm, UserSignUpForm
+from .forms import UserLoginForm, UserSignUpForm, UserChangePassword
 
 
 def login_view(request):
@@ -16,7 +16,7 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'Has iniciado sesion correctamente')
+            #messages.success(request, 'Has iniciado sesion correctamente')
             return redirect('index')
         else:
             messages.warning(
@@ -43,12 +43,31 @@ def signup_view(request):
                 is_active=True
             )
             login(request, user)
-            return redirect('users:profile')
+            return redirect('index')
 
         except Exception as e:
             print(e)
             return JsonResponse({'detail': f'{e}'})
 
+    messages.warning(request, 'Las Contraseñas no coinciden')
+    return redirect('index')
+
+def changepassword(request):
+    ChangePassword = UserChangePassword(request.POST or None)
+    if ChangePassword.is_valid():
+        old_password = ChangePassword.cleaned_data.get('old_password')
+        new_password = ChangePassword.cleaned_data.get('new_password')
+        reenter_password   = ChangePassword.cleaned_data.get('reenter_password')
+        try:
+            user = get_user_model().objects.update(
+                password=make_password(new_password),
+            )
+            messages.success(request, 'Contraseña cambiada, ingresa nuevamente')
+            #login(request, user)
+            return redirect('index')
+        except Exception as e:
+            print(e)
+            return JsonResponse({'detail': f'{e}'})
     messages.warning(request, 'Las Contraseñas no coinciden')
     return redirect('index')
 

@@ -27,10 +27,4 @@ urlpatterns = [
     path('', index, name = 'index'),
     path('paginas/', include('paginas.urls')),
     path('',  include('users.urls', namespace='users')),
-    #path('login/',login_view,name = 'login'),
-    #path('modal/',modal,name = 'modal'),
-    #path('logout/',logout_view,name = 'logout_view'),
-    #path('register/',register_view,name = 'register'),
-    #path('login/change_password/', change_password, name='change_password'),
-
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

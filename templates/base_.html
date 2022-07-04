@@ -26,6 +26,13 @@
 	<!-- Theme Style -->
 	<link href="{% static '/css/style.css' %}" rel="stylesheet">
 
+	<style>
+	.test{
+		height:40px;
+		width:40px;
+	}
+	</style>
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -36,6 +43,7 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar">
 	{% include "user/login.html" %}
+	{% include "user/change_password.html" %}
 	<div id="main-wrapper">
 	<!-- Page Preloader -->
 	<div id="preloader">
@@ -85,29 +93,33 @@
 							<div class="col-md-4">
 								<div class="right_section">
 									<ul class="nav navbar-nav">
-										{% if request.user.is_authenticated %}								
-											<li><a href="change_password">Cambiar Pass</a></li>
-											<li>
-												<a href={% url 'users:profile' %}>
-												<img src={{ user.profile_pic.url }} class="rounded-circle" height="30" width='30' alt="" loading="lazy" />
-												</a>
-											</li>
+										{% if request.user.is_authenticated %}
+																
+											<button type="button"
+													class="btn btn-secondary btn-lg" 
+													data-toggle="modal"
+													style="text-align:center;" 
+													data-target="#modal_change">CAMBIAR CONTRASEÑA<br>{{ user.first_name }}
+											</button>											 											
+											<a href={% url 'users:profile' %}>
+												<img src={{ user.profile_pic.url }} class="rounded" height="40" width='40' alt="" loading="lazy" />
+											</a>
 										{% else %}
-											<!-- <li>
-												<button type="button" class="btn btn-primary" data-mdb-toggle='modal' data-mdb-target='#loginModal'>
-												Iniciar Sesión
-												</button>
-											</li>-->
 											<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_login">Iniciar Sesion / Registrarse</button>
+											{% for message in messages %}
+											<!-- <div class="alert alert-{{message.tags}} alert-dismissible fade show" role='alert'> -->
+												<br>{{ message }}
+											<!-- </div> -->
+											{% endfor %}											
 										{% endif %}
-										<li class="dropdown lang">
+										<!--<li class="dropdown lang">
 											<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
 												data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">En <i
 												class="fa fa-angle-down"></i></button>
 											<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 												<li><a href="#">Bn</a></li>
 											</ul>
-										</li>
+										</li>-->
 									</ul>
 									<!-- Language Section -->
 
