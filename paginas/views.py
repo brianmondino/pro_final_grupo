@@ -72,7 +72,8 @@ def detail_view(request, pk):
 def update_view(request, pk):
     obj = get_object_or_404(Paginas, id = pk)
     form = Pagina_form(request.POST or None, instance = obj)
-    context = {'form':form}
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'form':form, 'secciones':secciones}
     if form.is_valid():
         form.save()
     return render(request, "update_view.html", context)
