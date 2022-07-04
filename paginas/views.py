@@ -28,7 +28,10 @@ def listar_paginas(request, seccion=""):
 def detalle_pagina(request, pk):
     try:
         pagina = Paginas.objects.get(id=pk)
-        pagina.valoracion = pagina.puntaje / pagina.votos
+        if pagina.votos > 0:
+            pagina.valoracion = pagina.puntaje / pagina.votos
+        else: 
+            pagina.valoracion = 0
         secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
         context = {'pagina':pagina, 'secciones':secciones}
         return render(request, 'detalle_pagina.html', context=context)
@@ -107,7 +110,7 @@ def borrar_pagina(request, pk):
             paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
             secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
             context = {'paginas':paginas, 'secciones':secciones}
-            return render(request, 'paginas.html', context=context)
+            return render(request, 'listar_paginas2.html', context=context)
         
     except:
         context = {'error':'El Producto no existe'}
