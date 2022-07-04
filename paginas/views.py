@@ -46,12 +46,6 @@ def listar_paginas2(request): # borré seccion=""
 
 
 
-
-
-
-
-
-
 # update view for details
 def actualiza_vista(request, pk):
     obj = get_object_or_404(Paginas, id = pk)
@@ -106,11 +100,15 @@ def borrar_pagina(request, pk):
         if request.method == 'GET':
             pagina = Paginas.objects.get(id=pk)
             context = {'pagina':pagina}
+            return render(request, 'borrar_pagina.html', context=context)
         else:
             pagina = Paginas.objects.get(id=pk)
             pagina.delete()
-            context = {'message':'Pagina eliminada correctamente'}
-        return render(request, 'borrar_pagina.html', context=context)
+            paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
+            secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+            context = {'paginas':paginas, 'secciones':secciones}
+            return render(request, 'paginas.html', context=context)
+        
     except:
         context = {'error':'El Producto no existe'}
         return render(request, 'borrar_pagina.html', context=context)
