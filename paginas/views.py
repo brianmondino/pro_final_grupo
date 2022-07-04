@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from paginas.models import Paginas, Secciones
 from paginas.forms import Pagina_form
 from django.http import HttpResponse, JsonResponse
-from perfiles.models import Perfiles
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -28,6 +27,14 @@ def listar_paginas(request, seccion_id=""):
     else:
         context = {'paginas':paginas, 'secciones':secciones, 'seccion':seccion}
     return render(request, 'paginas.html', context=context)
+
+@login_required
+def listar_paginas2(request): # borré seccion=""
+    paginas = Paginas.objects.all # saque order_by('-fecha')
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'paginas':paginas, 'secciones':secciones}
+    return render(request, 'listar_paginas2.html', context=context)    
+
 
 def detalle_pagina(request, pk):
     try:

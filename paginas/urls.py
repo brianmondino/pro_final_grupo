@@ -7,6 +7,7 @@ urlpatterns =[
     path('', listar_paginas, name = 'paginas'),
     path('<int:seccion_id>/', listar_paginas, name = 'paginas'),
     path('crear-pagina/', crear_pagina, name = 'crear_pagina'),
+    path('listar-paginas2/', listar_paginas2, name = 'listar_paginas2'),
     path('buscar-pagina/', buscar_pagina, name = 'buscar_pagina'),
     path('detalle-pagina/<int:pk>/', detalle_pagina, name = 'detalle_pagina'),
     path('borrar-pagina/<int:pk>/', borrar_pagina, name = 'borrar_pagina'),

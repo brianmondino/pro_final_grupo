@@ -26,13 +26,13 @@
 											<div class="m-menu-content">
 												<ul class="col-sm-6">
 													<li class="dropdown-header">Paginas</li>
-													<li><a href="/paginas/listar-paginas2">Listar Página</a></li>
+													<li><a href="/paginas/listar-paginas2">Listar Páginas</a></li>
 													<li><a href="/paginas/crear-pagina">Crear Página</a></li>
 												</ul>
 												{% if request.user.is_staff %} 
 												<ul class="col-sm-6">
-													<li class="dropdown-header">Usuarios</li>
-													<li><a href="#">Listar Usuarios</a></li>
+													<li class="dropdown-header">Usuarios</li>													
+													<li><a href={% url 'users:list' %}>Listar Usuarios</a></li>
 													{% if request.user.is_superuser %} 
 														<li><a href="">Editar Usuario</a></li>
 														<li><a href="#">Eliminar Usuario</a></li>

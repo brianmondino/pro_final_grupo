@@ -20,19 +20,11 @@ from django_base.views import index,login_view,logout_view,register_view,modal, 
 from django.conf import settings
 from django.conf.urls.static import static
 #from django.conf.urls import url
-from django.urls import include, re_path
-
-
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = 'index'),
     path('paginas/', include('paginas.urls')),
-    path('perfiles/', include('perfiles.urls')),
-    path('login/',login_view,name = 'login'),
-    path('modal/',modal,name = 'modal'),
-    path('logout/',logout_view,name = 'logout_view'),
-    path('register/',register_view,name = 'register'),
-    path('login/cambiar-pass/', cambiar_pass, name='cambiar_pass'),
-
+    path('',  include('users.urls', namespace='users')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
