@@ -5,6 +5,10 @@ from paginas.forms import Pagina_form, Seccion_form
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
+from django.urls import reverse
+from django.contrib.auth.forms import UserChangeForm
 
 # Create your views here.
 #@login_required       
@@ -96,35 +100,13 @@ def actualiza_vista(request, pk):
 
 
 ################################################################
+class crear_pagina(LoginRequiredMixin, CreateView):
+    model = Paginas
+    template_name = 'crear_pagina.html'
+    fields = '__all__'
+    def get_success_url(self):
+        return reverse('index')
 
-@login_required
-def crear_pagina(request):
-    if request.method == 'GET':
-        form = Pagina_form()
-        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-        context = {'form':form, 'secciones':secciones}
-        return render(request, 'crear_pagina.html', context=context)
-    elif request.method == 'POST':        
-        form = Pagina_form(request.POST, request.FILES)
-        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
-        if form.is_valid():
-            nueva_pagina = Paginas.objects.create(
-                titulo = form.cleaned_data['titulo'],
-                autor = form.cleaned_data['autor'],
-                fecha = form.cleaned_data['fecha'],
-                copete = form.cleaned_data['copete'],
-                cuerpo = form.cleaned_data['cuerpo'],
-                imagen = form.cleaned_data['imagen'], 
-                imagen_epigrafe = form.cleaned_data['imagen_epigrafe'],                
-                habilitada = form.cleaned_data['habilitada'],
-            )
-            context = {'nueva_pagina':nueva_pagina, 'secciones':secciones}
-        else:
-            context = {'errors':form.errors, 'secciones':secciones}
-        return render(request, 'crear_pagina.html', context = context)
-
-    else:
-        return redirect('login')
 
 def borrar_pagina(request, pk):
     try:
