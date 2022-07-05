@@ -1,5 +1,4 @@
-{% extends "../base.html" %}
-
+{% extends "../base_backoffice.html" %}
 {% block contenido %}
 <div class='container d-flex justify-content-center mt-5 col-md-10 col-xl-8'>
   <div class="card shadow-4-strong mb-3">
@@ -10,21 +9,23 @@
       <div class="col-md-7">
         <div class="card-body">
           <div class='row justify-content-center'>
-            <h4 class="col-12 card-title text-center mb-4">{{ user.first_name}} {{ user.last_name}}</h4>
-            <p class="col-4 text-center mb-0">Publicaciones <strong>{{ user.count_posts }}</strong></p>
-            <p class="col-4 text-center mb-0">Seguidores <strong>{{ user.followers.all|length }}</strong></p>
-            <p class="col-4 text-center mb-0">Seguidos <strong>{{ user.count_following }}</strong></p>
-            <p class="col-4 text-center"></p>
-            <p class="card-text text-center mb-5">{{ user.bio }}</p>
-            <p class="col-4 text-right">
-              <a class='btn btn-danger btn-rounded col-5' href={% url 'users:logout'%}>Cerrar Sesion</a>
+            <h4 class="col-12 card-title mb-4">{{ user.first_name}} {{ user.last_name}}</h4>
+            <p class="col-4 mb-0">Publicaciones <strong>{{ user.count_posts }}</strong></p>
+            <p class="col-4 mb-0">Seguidores <strong>{{ user.followers.all|length }}</strong></p>
+            <p class="col-4 mb-0">Seguidos <strong>{{ user.count_following }}</strong></p>
+            <p class="col-4 nter"></p>
+            <p class="card-text mb-5">{{ user.bio }}</p>
+            <p class="col-4">
+              {% if request.user.is_superuser %} 
+                <a class='btn btn-rounded col-5' style="background-color: #55694e; color: #FFFFFF;" href="#">Editar</a>
+              {% endif %}
+              <a class='btn btn-rounded col-5' style="background-color: #b30707; color: #FFFFFF;" href={% url 'users:logout'%}>Cerrar Sesion</a>
             </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
 
 {% endblock %}

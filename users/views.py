@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from users.context_processors import edituser_form
 
 from users.models import UserProfile
 
@@ -72,31 +73,42 @@ def changepassword(request):
     return redirect('index')
 
 
-def edituser_view(request):
-    edituser_form = EditUserForm(request.POST or None)
-    if edituser_form.is_valid():
-        first_name   = EditUserForm.cleaned_data.get('first_name')
-        last_name    = EditUserForm.cleaned_data.get('last_name')
-        is_superuser = EditUserForm.cleaned_data.get('is_superuser')
-        is_staff     = EditUserForm.cleaned_data.get('is_staff')
-        is_active    = EditUserForm.cleaned_data.get('is_active')
-        bio          = EditUserForm.cleaned_data.get('bio')
-        try:
-            user = get_user_model().objects.update(
-                first_name=first_name,
-                last_name=last_name,
-                is_superuser=is_superuser,
-                is_staff = is_staff,
-                is_active=is_active,
-                bio=bio
-            )
-            return redirect('index')
-        except Exception as e:
-            print(e)
-            return JsonResponse({'detail': f'{e}'})
-            
-    messages.warning(request, 'Datos incorrectos')
-    return redirect('index')
+def edituser_view(request, slug):
+    user_detail = get_object_or_404(get_user_model(), slug=slug)
+    form = EditUserForm(instance = user_detail)
+    context = {'form':form,'slug':slug}
+    return render(request, 'user/user_edit2.html',context)    
+    
+
+    #usuario = get_object_or_404(get_user_model(), slug=slug)
+    #if not request.user.is_authenticated:
+    #    messages.warning(request, 'Debes iniciar sesion')
+    #else:
+    #    edituser_form = EditUserForm(request.POST,usuario)
+    #    if edituser_form.is_valid():
+    #        first_name   = EditUserForm.cleaned_data.get('first_name')
+    #        last_name    = EditUserForm.cleaned_data.get('last_name')
+    #        is_superuser = EditUserForm.cleaned_data.get('is_superuser')
+    #        is_staff     = EditUserForm.cleaned_data.get('is_staff')
+    #        is_active    = EditUserForm.cleaned_data.get('is_active')
+    #        bio          = EditUserForm.cleaned_data.get('bio')
+    #        profile_pic  = EditUserForm.cleaned_data.get('profile_pic')
+    #        try:
+    #            user = get_user_model().objects.update(
+    #                first_name=first_name,
+    #                last_name=last_name,
+    #                is_superuser=is_superuser,
+    #                is_staff = is_staff,
+    #                is_active=is_active,
+    #               bio=bio,
+    #                profile_pic=profile_pic
+    #            )
+    #            return redirect('index')
+    #        except Exception as e:
+    #            print(e)
+    #            return JsonResponse({'detail': f'{e}'})
+    #    messages.warning(request, 'Datos incorrectos')
+    #    return redirect('index')
 
 
 

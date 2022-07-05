@@ -1,6 +1,8 @@
 from unittest.util import _MAX_LENGTH
 from django import forms
 
+from users.models import UserProfile
+
 class UserChangePassword(forms.Form):
     old_password = forms.CharField(
                 widget=forms.PasswordInput(
@@ -106,37 +108,46 @@ class UserSignUpForm(forms.Form):
         return cd['password2']
 
 
-class EditUserForm(forms.Form):
-    first_name = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(
-            attrs={
-                'type': 'text',
-                'class': 'form-control'
-            }
-        ))
 
-    last_name = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(
-            attrs={
-                'type': 'text',
-                'class': 'form-control'
-            }
-        ))
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['first_name','last_name','bio']
 
-    is_superuser = forms.BooleanField(
-        widget=forms.CheckboxInput())
+    # first_name = forms.CharField(
+    #     max_length=100,
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'type': 'text',
+    #             'class': 'form-control'
+    #         }
+    #     ))
 
-    profile_pic = forms.ImageField(widget=forms.ImageField) 
+#    last_name = forms.CharField(
+#        max_length=100,
+#        widget=forms.TextInput(
+#            attrs={
+#                'type': 'text',
+#                'class': 'form-control'
+#            }
+#        ))
 
-    bio = forms.Textarea() 
+    # profile_pic=forms.ImageField(
+    #     )
 
-    is_superuser = forms.BooleanField(
-        widget=forms.CheckboxInput())
+    # bio = forms.CharField(
+    #     widget=forms.Textarea(
+    #         attrs={
+    #             'type': 'text',
+    #             'class': 'form-control'
+    #         }
+    #     ))
 
-    is_staff = forms.BooleanField(
-        widget=forms.CheckboxInput())
+    # is_superuser = forms.BooleanField(
+    #     widget=forms.CheckboxInput())
 
-    is_active = forms.BooleanField(
-        widget=forms.CheckboxInput())
+    # is_staff = forms.BooleanField(
+    #     widget=forms.CheckboxInput())
+
+    # is_active = forms.BooleanField(
+    #     widget=forms.CheckboxInput())

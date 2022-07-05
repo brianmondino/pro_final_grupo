@@ -16,7 +16,7 @@ Including another URLconf
 from django import views
 from django.contrib import admin
 from django.urls import path, include
-from django_base.views import index, sobrenosotros, login_view,logout_view,register_view,modal, cambiar_pass
+from django_base.views import index, sobrenosotros
 from django.conf import settings
 from django.conf.urls.static import static
 #from django.conf.urls import url
