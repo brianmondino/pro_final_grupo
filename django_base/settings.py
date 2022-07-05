@@ -77,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'users.context_processors.login_form',
                 'users.context_processors.changepassword',
+                'users.context_processors.edituser_form',
             ],
         },
     },

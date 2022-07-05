@@ -1,4 +1,4 @@
-from .forms import UserLoginForm, UserSignUpForm,UserChangePassword
+from .forms import UserLoginForm, UserSignUpForm,UserChangePassword,EditUserForm
 
 def login_form(request):
     login_form = UserLoginForm()
@@ -12,4 +12,10 @@ def changepassword(request):
     change_password = UserChangePassword()
     return {
         'changepassword': change_password
+    }
+
+def edituser_form(request):
+    edituser_form = EditUserForm()
+    return {
+        'edituserform': edituser_form
     }

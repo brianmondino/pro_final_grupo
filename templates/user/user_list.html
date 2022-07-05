@@ -10,7 +10,12 @@
                 <h5 class="card-title">{{user.email}}</h5>
                 <p class="card-text">{{user.first_name}} {{user.last_name}} </p>
                 <p class="card-text">{{user.bio}}</p>
-                <a href="#" class="btn btn-primary">Ver mas!</a>
+                {% if request.user.is_superuser %}
+                    <a href={% url 'users:edit' %} class="btn btn-primary">Editar</a>
+                    <a href={% url 'users:edit' %} class="btn btn-primary">Eliminar</a>
+                {% else %}
+                    <a href={% url 'users:profile' %} class="btn btn-primary">Ver mas!</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

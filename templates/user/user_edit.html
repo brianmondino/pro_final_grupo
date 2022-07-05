@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block contenido %}
+    <form id="edit" class="text-center" action="{% url 'users:edit'%}" method="post">
+        {% csrf_token %}
+        <div class="form-outline form-auth-mdb mb-4">
+            {{ edituserform.first_name }}
+            <label class="form-label" style="margin-left: 0px;">Nombre</label>
+        </div>
+
+        <div class="form-outline form-auth-mdb mb-4">
+            {{ edituserform.last_name }}
+            <label class="form-label" style="margin-left: 0px;">Apellido</label>
+        </div>
+
+        <div class="form-outline form-auth-mdb mb-4">
+            {{ edituserform.is_superuser }}
+            <label class="form-label" style="margin-left: 0px;">Superuser</label>
+        </div>
+
+        <div class="form-outline form-auth-mdb mb-4">
+            {{ edituserform.is_staff }}
+            <label class="form-label" style="margin-left: 0px;">Staff</label>
+        </div>
+        
+        <div class="form-outline form-auth-mdb mb-4">
+            {{ edituserform.is_active }}
+            <label class="form-label" style="margin-left: 0px;">Activo</label>
+        </div>
+
+        <div class="form-outline form-auth-mdb mb-4">
+            {{ edituserform.bio }}
+            <label class="form-label" style="margin-left: 0px;">Bio</label>
+        </div>
+
+        <button class="btn btn-primary btn-block mb-3" type="submit">Grabar</button>
+    </form>
+{% endblock %}
