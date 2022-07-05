@@ -63,6 +63,9 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def get_absolute_url(self):
         return reverse('users:user_detail', args=[self.slug])
 
+    #def get_absolute_url2(self):
+    #    return reverse('users:edituser_view', args=[self.slug])        
+
     def count_following(self):
         users_following = UserProfile.objects.filter(followers=self)
         return users_following.count()

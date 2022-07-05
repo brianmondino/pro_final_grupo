@@ -1,17 +1,7 @@
+from unittest.util import _MAX_LENGTH
 from django import forms
 
-#class UserChangePassword(forms.Form):
-#    old_password=forms.CharField()
-#    new_password=forms.CharField()
-#    reenter_password=forms.CharField()
-#    def clean(self):
-#        new_password=self.cleaned_data.get('new_password')
-#        reenter_password=self.cleaned_data.get('reenter_password')
-#        #similarly old_password
-#        if new_password and new_password!=reenter_password or new_password==old_password:
-#        #raise error
-#        #get the user object and check from old_password list if any one matches with the new password raise error(read whole answer you would know) 
-#            return self.cleaned_data #don't forget this.
+from users.models import UserProfile
 
 class UserChangePassword(forms.Form):
     old_password = forms.CharField(
@@ -116,3 +106,48 @@ class UserSignUpForm(forms.Form):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Las Contraseñas no coinciden')
         return cd['password2']
+
+
+
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ['password','last_login','email','slug','register_date','groups','user_permissions','followers']
+
+    # first_name = forms.CharField(
+    #     max_length=100,
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'type': 'text',
+    #             'class': 'form-control'
+    #         }
+    #     ))
+
+#    last_name = forms.CharField(
+#        max_length=100,
+#        widget=forms.TextInput(
+#            attrs={
+#                'type': 'text',
+#                'class': 'form-control'
+#            }
+#        ))
+
+    # profile_pic=forms.ImageField(
+    #     )
+
+    # bio = forms.CharField(
+    #     widget=forms.Textarea(
+    #         attrs={
+    #             'type': 'text',
+    #             'class': 'form-control'
+    #         }
+    #     ))
+
+    # is_superuser = forms.BooleanField(
+    #     widget=forms.CheckboxInput())
+
+    # is_staff = forms.BooleanField(
+    #     widget=forms.CheckboxInput())
+
+    # is_active = forms.BooleanField(
+    #     widget=forms.CheckboxInput())
