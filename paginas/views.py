@@ -1,6 +1,7 @@
+from sqlite3 import TimestampFromTicks
 from django.shortcuts import render, get_object_or_404, redirect
 from paginas.models import Paginas, Secciones
-from paginas.forms import Pagina_form
+from paginas.forms import Pagina_form, Seccion_form
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -158,3 +159,45 @@ def buscar_pagina(request):
     return render(request, 'buscar_paginas.html', context = context)
 
 
+###################################################################
+###################################################################
+###################################################################
+#secciones // crear seccion // listar seccion 
+
+@login_required
+def crear_seccion(request):
+    if request.method == 'GET':
+        form = Seccion_form()
+        #secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+        context = {'form':form}
+        return render(request, 'crear_seccion.html', context=context)
+    elif request.method == 'POST':        
+        form = Seccion_form(request.POST, request.FILES)
+        secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+        if form.is_valid():
+            nueva_seccion = Secciones.objects.create(
+                nombre = form.cleaned_data['nombre'],
+                habilitada = form.cleaned_data['habilitada'],
+                #tstamp = form.cleaned_data['tstamp'],
+            )
+            context = {'nueva_seccion':nueva_seccion, 'secciones':secciones}
+        else:
+            context = {'errors':form.errors, 'secciones':secciones}
+        return render(request, 'crear_seccion.html', context = context)
+
+    else:
+        return redirect('login')
+
+
+
+
+@login_required
+def listar_seccion(request): # borré seccion=""
+    secciones = Secciones.objects.all
+    context = {'secciones':secciones}
+    return render(request, 'listar_seccion.html', context=context)
+
+
+###################################################################
+###################################################################
+###################################################################
