@@ -123,7 +123,7 @@ def borrar_pagina(request, pk):
             return render(request, 'listar_paginas2.html', context=context)
         
     except:
-        context = {'error':'El Producto no existe'}
+        context = {'error':'La pagina no existe'}
         return render(request, 'borrar_pagina.html', context=context)
 
 def buscar_pagina(request):
