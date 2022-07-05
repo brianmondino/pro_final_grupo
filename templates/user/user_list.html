@@ -1,23 +1,41 @@
 {% extends 'base_backoffice.html' %}
 {% block contenido %}
-<div class="d-flex" style="margin-top:5rem; margin-left:7rem"></div>
-    {% for user in users %}
-        <div class="card" style="width: 25rem;">
+<table width="100%" class="table-bordered">
+<tr style="background-color: black; color: white;">
+    <td></td>
+    <td>Correo</td>
+    <td>Nombre completo</td>
+    <td>Bio</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+{% for user in users %}
+<tr>
+        <td>
             {% if user.profile_pic %}
                 <img src="{{user.profile_pic.url}}" class="card-img-top" height="60" width='60' alt="" loading="lazy" >
             {% endif %}
-            <div class="card-body">
-                <h5 class="card-title">{{user.email}}</h5>
-                <p class="card-text">{{user.first_name}} {{user.last_name}} </p>
-                <p class="card-text">{{user.bio}}</p>
-                {% if request.user.is_superuser %}
-                    <a href={% url 'users:edit' %} class="btn btn-primary">Editar</a>
-                    <a href={% url 'users:edit' %} class="btn btn-primary">Eliminar</a>
-                {% else %}
-                    <a href={% url 'users:profile' %} class="btn btn-primary">Ver mas!</a>
-                {% endif %}
-            </div>
-        </div>
-    {% endfor %}
-</div>
+        </td>
+        <td>
+            {{user.email}}
+        </td>
+        <td>
+            {{user.first_name}} {{user.last_name}}
+        </td>
+        <td>
+            {{user.bio}}
+        </td>
+        <td style="background-color: black; color: white; text-align: center;">
+            <a href="#" style="color: white;" >Ver mas!</a>
+        </td>    
+        <td style="background-color: black; color: #FFFFFF; text-align: center;">
+            <a href="#" style="color: #FFFFFF;" >EDITAR</a>
+        </td> 
+        <td style="background-color: black; color: white; text-align: center;">
+            <a href="#">ELIMINAR</a>
+        </td>                 
+</tr>
+{% endfor %}
+</table>
 {% endblock %}

@@ -31,8 +31,7 @@
 													<li class="dropdown-header">Usuarios</li>													
 													<li><a href={% url 'users:list' %}>Listar Usuarios</a></li>
 													{% if request.user.is_superuser %} 
-														<li><a href={% url 'users:edit' %}>Editar Usuario</a></li>
-														<li><a href="#">Eliminar Usuario</a></li>
+														<li><a href="">Crear Usuario</a></li>
 													{% endif %}
 												</ul>																							
 												{% endif %}
