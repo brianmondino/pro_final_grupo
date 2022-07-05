@@ -112,7 +112,7 @@ class UserSignUpForm(forms.Form):
 class EditUserForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['first_name','last_name','bio']
+        exclude = ['password','last_login','email','slug','register_date','groups','user_permissions','followers']
 
     # first_name = forms.CharField(
     #     max_length=100,

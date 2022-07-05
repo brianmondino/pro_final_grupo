@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from users.context_processors import edituser_form
-
+from paginas.models import Secciones
 from users.models import UserProfile
 
 from .forms import UserLoginForm, UserSignUpForm, UserChangePassword, EditUserForm
@@ -75,10 +75,56 @@ def changepassword(request):
 
 def edituser_view(request, slug):
     user_detail = get_object_or_404(get_user_model(), slug=slug)
-    form = EditUserForm(instance = user_detail)
-    context = {'form':form,'slug':slug}
-    return render(request, 'user/user_edit2.html',context)    
-    
+    if request.method == 'POST':
+        form = EditUserForm(request.POST, request.FILES, instance = user_detail)
+        if form.is_valid():
+            form.save()
+            return redirect("/list")
+    else:
+        form = EditUserForm(instance = user_detail)
+        context = {'form':form,'slug':slug}
+        return render(request, 'user/user_edit2.html',context)
+
+
+def borrar_usuario(request, slug):
+    user_detail = get_object_or_404(get_user_model(), slug=slug)
+    try:
+        if request.method == 'GET':
+            secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+            context = {'user_detail':user_detail, 'secciones':secciones}
+            return render(request, 'user/borrar_usuario.html', context=context)
+        else:
+            user_detail.delete()
+            context = {'user_detail':user_detail}
+            return redirect("/list")
+        
+    except:
+        context = {'error':'El usuario no existe'}
+        return render(request, 'user/borrar_usuario.html', context=context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    try:
+        if request.method == 'POST':
+            user_detail.delete()            
+            return redirect("/list")
+    except:
+        messages.warning(request, 'Usuario no eliminado')         
+        return redirect('/list')
+
 
     #usuario = get_object_or_404(get_user_model(), slug=slug)
     #if not request.user.is_authenticated:
