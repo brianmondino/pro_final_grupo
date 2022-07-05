@@ -1,5 +1,6 @@
 {% extends 'base_backoffice.html' %}
 {% block contenido %}
+<div class="d-flex" style="margin-top:5rem; margin-left:7rem"></div>
     {% for user in users %}
         <div class="card" style="width: 25rem;">
             {% if user.profile_pic %}
@@ -13,4 +14,5 @@
             </div>
         </div>
     {% endfor %}
+</div>
 {% endblock %}

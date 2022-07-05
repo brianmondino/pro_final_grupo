@@ -16,7 +16,7 @@ Including another URLconf
 from django import views
 from django.contrib import admin
 from django.urls import path, include
-from django_base.views import index,login_view,logout_view,register_view,modal, cambiar_pass
+from django_base.views import index, sobrenosotros, login_view,logout_view,register_view,modal, cambiar_pass
 from django.conf import settings
 from django.conf.urls.static import static
 #from django.conf.urls import url
@@ -27,4 +27,5 @@ urlpatterns = [
     path('', index, name = 'index'),
     path('paginas/', include('paginas.urls')),
     path('',  include('users.urls', namespace='users')),
+    path('sobre-nosotros/', sobrenosotros, name ='sobrenosotros')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
