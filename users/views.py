@@ -129,6 +129,7 @@ def borrar_usuario(request, slug):
 
 
 
+
     try:
         if request.method == 'POST':
             user_detail.delete()            
