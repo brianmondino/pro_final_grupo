@@ -126,20 +126,25 @@ def borrar_pagina(request, pk):
         context = {'error':'La pagina no existe'}
         return render(request, 'borrar_pagina.html', context=context)
 
+# def buscar_pagina(request):
+#     palabra_busqueda = request.GET['buscar']
+#     paginas = Paginas.objects.filter(titulo__icontains = palabra_busqueda)
+#     if paginas.exists():
+#         print(1)
+#         context = {'paginas':paginas}
+#         return render(request, 'buscar_paginas.html', context = context)
+#     else:
+#         print(2)
+#         context = {'errors':'No se encontro el valor correcto'}
+#     return render(request, 'buscar_paginas.html', context = context)
+
 def buscar_pagina(request):
-    palabra_busqueda = request.GET['buscar']
-    paginas = Paginas.objects.filter(titulo__icontains = palabra_busqueda)
-    perfil_buscar = Perfiles.objects.filter(nombre__icontains = palabra_busqueda)
+    paginas = Paginas.objects.filter(titulo__icontains=request.GET['buscar'])
     if paginas.exists():
         context = {'paginas':paginas}
-        return render(request, 'buscar_paginas.html', context = context)
-    elif perfil_buscar.exists():
-            context = {'perfil_buscar':perfil_buscar}
-            return render(request, 'buscar_perfil.html', context = context)
     else:
-        context = {'errors':'No se encontro el valor correcto'}
+        context = {'errors':'No se encontro la página'}
     return render(request, 'buscar_paginas.html', context = context)
-
 
 ###################################################################
 ###################################################################

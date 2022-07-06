@@ -18,4 +18,6 @@ urlpatterns =[
     path('listar-seccion/', listar_seccion, name = 'listar_seccion'),
     path('crear-seccion/', crear_seccion, name = 'crear_seccion')
 
+
+
 ]
