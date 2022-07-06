@@ -1,11 +1,18 @@
 #Superusuario
-#usuario: proyectofinal
-#password: abc123
+#usuario: coderhouse@mail.com
+#password: coder123
+
+## Presentación
+Tech Yes! es un pagina web joven creada por tres entusiastas de la programación. El sitio está basado en un backend the python y framework de django y cuyo propósito es poder representar en una base practica los contenidos transmitidos a través de las lecciones de CoderHouse. 
+Confiamos en que lo observado en el sitio pueda satisfacer sus expectativas! 
+Agradecemos especialmente a Luca Citta Giordano y a Ramiro Peidro por su asistencia en el proyecto.
+Muchas Gracias.
 
 
 ## Instalacion:
     * pip install -r requirements.txt
-    * python manage.py migrate
+    * python manage.py makemigrations
+	* python manage.py migrate
     * python manage.py runserver
     * python -m pip install Pillow
 
