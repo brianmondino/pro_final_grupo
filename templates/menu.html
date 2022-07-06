@@ -36,7 +36,7 @@
 													<li class="dropdown-header">Usuarios</li>													
 													<li><a href={% url 'users:list' %}>Listar Usuarios</a></li>
 													{% if request.user.is_superuser %} 
-														<li><a href="/templates/prueba.html">Crear Usuario</a></li>
+														<li><a href={% url 'users:crear' %}>Crear Usuario</a></li>
 													{% endif %}
 												</ul>																							
 												{% endif %}

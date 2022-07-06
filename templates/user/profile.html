@@ -17,7 +17,7 @@
             <p class="card-text mb-5">{{ user.bio }}</p>
             <p class="col-4">
               {% if request.user.is_superuser %} 
-                <a class='btn btn-rounded col-5' style="background-color: #55694e; color: #FFFFFF;" href="#">Editar</a>
+                <a class='btn btn-rounded col-5' style="background-color: #55694e; color: #FFFFFF;" href="/edit2/{{user.slug}}" style="color: #FFFFFF;">Editar</a>
               {% endif %}
               <a class='btn btn-rounded col-5' style="background-color: #b30707; color: #FFFFFF;" href={% url 'users:logout'%}>Cerrar Sesion</a>
             </p>

@@ -52,7 +52,7 @@ def signup_view(request):
             print(e)
             return JsonResponse({'detail': f'{e}'})
     messages.warning(request, 'Las Contraseñas no coinciden')
-    return redirect('index')
+    return redirect('index')    
 
 def changepassword(request):
     ChangePassword = UserChangePassword(request.POST or None)
@@ -73,7 +73,7 @@ def changepassword(request):
     return redirect('index')
 
 
-def edituser_view(request, slug):
+def edituser_list(request, slug):
     user_detail = get_object_or_404(get_user_model(), slug=slug)
     if request.method == 'POST':
         form = EditUserForm(request.POST, request.FILES, instance = user_detail)
@@ -84,6 +84,18 @@ def edituser_view(request, slug):
         form = EditUserForm(instance = user_detail)
         context = {'form':form,'slug':slug}
         return render(request, 'user/user_edit2.html',context)
+
+def edituser_view(request, slug):
+    user_detail = get_object_or_404(get_user_model(), slug=slug)
+    if request.method == 'POST':
+        form = EditUserForm(request.POST, request.FILES, instance = user_detail)
+        if form.is_valid():
+            form.save()
+            return redirect("/profile")
+    else:
+        form = EditUserForm(instance = user_detail)
+        context = {'form':form,'slug':slug}
+        return render(request, 'user/user_edit2.html',context)        
 
 
 def borrar_usuario(request, slug):
