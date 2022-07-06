@@ -1,0 +1,34 @@
+{% extends 'base_backoffice.html' %}
+{% block contenido %}
+<table width="100%" class="table-bordered">
+    <thead>
+        
+        <tr style= "background-color: #100e0f">
+            <th style="color:rgb(234, 235, 240)" >ID</th>
+            <th style="color:rgb(234, 235, 240)" >Fecha</th>
+            <th style="color:rgb(234, 235, 240)" >Título</th>
+            <th style="color:rgb(234, 235, 240)" >Autor</th>
+            <th style="color:rgb(234, 235, 240)" >Votos</th>
+            <th style="color:rgb(234, 235, 240)" >Puntaje</th>
+            <th style="color:rgb(234, 235, 240)" >Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pagina in paginas %}
+            <tr>
+                <td align="center">{{pagina.id}}</td>
+                <td>{{pagina.fecha}}</td>
+                <td>{{pagina.titulo}}</td>
+                <td>{{pagina.autor}}</td>
+                <td align="center">{{pagina.votos}}</td>
+                <td align="center">{{pagina.puntaje}}</td>
+                <td>
+                    <a href="/paginas/detalle-pagina/{{pagina.id}}" target="_self">Ver</a><br>
+                    <a href="/paginas/actualiza-vista/{{pagina.id}}" target="_self">Editar</a><br>
+                    <a href="/paginas/borrar-pagina/{{pagina.id}}" target="_self">Borrar</a><br>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>    
+{% endblock %}

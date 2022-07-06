@@ -65,19 +65,19 @@ def register_view(request):
         context = {'form':form}
         return render(request,'login/register.html',context=context)
     
-def change_password(request):
+def cambiar_pass(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user) 
             messages.success(request, 'Contraseña Actualizada')
-            return redirect('change_password')
+            return redirect('cambiar_pass')
         else:
             messages.error(request, 'Corrija el error que muestra debajo.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'login/change_password.html', {'form': form})
+    return render(request, 'login/cambiar_pass.html', {'form': form})
 
 def index(request):
     paginas = Paginas.objects.filter(habilitada=True).order_by('-fecha')
@@ -92,3 +92,8 @@ def index(request):
     secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
     context = {'paginas':paginas, 'secciones':secciones}
     return render(request, 'paginas.html', context=context)
+
+def sobrenosotros(request):
+    secciones = Secciones.objects.filter(habilitada=True).order_by('nombre')
+    context = {'secciones':secciones}
+    return render(request, 'sobrenosotros.html', context=context)

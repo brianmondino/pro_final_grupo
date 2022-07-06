@@ -1,0 +1,24 @@
+{% extends "base_backoffice.html" %}
+{% block contenido %}
+<div class='container d-flex justify-content-center mt-5 col-md-10 col-xl-8'>
+  <div class="card shadow-4-strong mb-3">
+    <div class="row g-0">
+      <div class="col-md-5">
+        <img src={{ user_detail.profile_pic.url }} height="240" width="240" alt="..." class="img-fluid rounded" />
+      </div>
+      <div class="col-md-7">
+        <div class="card-body">
+          <div class='row justify-content-center'>
+            <h4 class="col-12 card-title mb-4">{{ user_detail.first_name}} {{ user_detail.last_name}}</h4>
+            <p class="col-4 mb-0">Publicaciones <strong>{{ user_detail.count_posts }}</strong></p>
+            <p class="col-4 mb-0">Seguidores <strong>{{ user_detail.followers.all|length }}</strong></p>
+            <p class="col-4 mb-0">Seguidos <strong>{{ user_detail.count_following }}</strong></p>
+            <p class="col-4 nter"></p>
+            <p class="card-text mb-5">{{ user_detail.bio }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base_backoffice.html' %}
+{% block contenido %}
+<table width="100%" class="table-bordered">
+    <tbody>
+        
+        <tr style= "background-color: #100e0f">
+            <td>
+                <h3 style="color:rgb(234, 235, 240)"> Nombre de la Seccion:</h3>
+            </td>>
+                <td>
+                    <h3 style="color:rgb(238, 236, 243)" >Habilitado: </h3>
+                    </td>>
+        </tr>
+        {% for seccion in secciones %}
+            <tr>
+                <td>
+                    <li><a href="/paginas/{{seccion.id}}">{{seccion.nombre}} </a></li>
+                </td>
+                <td>
+                    {{seccion.habilitada}}
+                    </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>    
+{% endblock %}

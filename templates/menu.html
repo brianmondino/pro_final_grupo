@@ -13,28 +13,30 @@
 						<ul class="nav navbar-nav main-nav">
 							<li class="active"><a href="/">Home</a></li>
 							{% for seccion in secciones %}
-							
 								<li><a href="/paginas/{{seccion.id}}">{{seccion.nombre}}</a></li>
-
 							{% endfor %}
-
 							{% if request.user.is_authenticated %}
 								<li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Mas
 									<span><i class="fa fa-angle-down"></i></span></a>
 									<ul class="dropdown-menu">
 										<li>
 											<div class="m-menu-content">
-												<ul class="col-sm-6">
+												<ul class="col-sm-4">
 													<li class="dropdown-header">Paginas</li>
+													<li><a href="/paginas/listar-paginas2">Listar Páginas</a></li>
 													<li><a href="/paginas/crear-pagina">Crear Página</a></li>
 												</ul>
+												<ul class="col-sm-4">
+													<li class="dropdown-header">Secciones</li>
+													<li><a href="/paginas/listar-seccion">Listar Secciones</a></li>
+													<li><a href="/paginas/crear-seccion">Crear Seccion</a></li>
+												</ul>
 												{% if request.user.is_staff %} 
-												<ul class="col-sm-6">
-													<li class="dropdown-header">Usuarios</li>
-													<li><a href="#">Listar Usuarios</a></li>
+												<ul class="col-sm-4">
+													<li class="dropdown-header">Usuarios</li>													
+													<li><a href={% url 'users:list' %}>Listar Usuarios</a></li>
 													{% if request.user.is_superuser %} 
-														<li><a href="">Editar Usuario</a></li>
-														<li><a href="#">Eliminar Usuario</a></li>
+														<li><a href={% url 'users:crear' %}>Crear Usuario</a></li>
 													{% endif %}
 												</ul>																							
 												{% endif %}

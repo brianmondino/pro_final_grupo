@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from django.contrib.auth.models import User
+from django.conf import settings
+
 
 # Create your models here.
 class Secciones(models.Model):
@@ -15,7 +16,7 @@ class Secciones(models.Model):
 
 class Paginas(models.Model):
     titulo = models.CharField(max_length=100)
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)#--------------------
     secciones = models.ManyToManyField(Secciones)
     fecha = models.DateTimeField()
     copete = models.CharField(max_length=500)
@@ -26,6 +27,7 @@ class Paginas(models.Model):
     votos = models.IntegerField(default=0)
     puntaje = models.IntegerField(default=0)
     tstamp = models.DateTimeField(auto_now_add=True)
+    
 
     class Meta:
         verbose_name = 'pagina'

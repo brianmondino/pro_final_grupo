@@ -42,7 +42,7 @@ BASE_APPS = [
 
 MY_APPS = [
     'paginas',
-    'perfiles',
+    'users',
 ]
 
 THIRD_APPS = [
@@ -75,6 +75,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'users.context_processors.login_form',
+                'users.context_processors.changepassword',
+                'users.context_processors.edituser_form',
             ],
         },
     },
@@ -142,3 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # LOGIN_REDIRECT_URL = 'auth/logged_in'
 LOGIN_URL='/login/'
+
+#Cambiando el modelo de Django por mi modelo personalizado de Usuarios
+AUTH_USER_MODEL = "users.UserProfile"
