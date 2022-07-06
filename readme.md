@@ -19,78 +19,51 @@ Muchas Gracias.
     * python -m pip install Pillow
 
 ## Uso y funcionalidad
-Todos los templates heredan caracteristicas de base.html (carpeta templates)
+Dependiendo de la forma de presentacion los templates heredan caracteristicas de base.html o de base_backoffice.html (carpeta templates)
+Se precarga en esos templates los archivos de CSS y de JS que estan en la carpera static
+
 
 Inicio
 
 	Landing page del proyecto - index.html (carpeta templates)
 
 
-Usuarios
+INICIAR SESION / REGISTRARSE
 
-	Listado de los usuarios - usuarios.html (carpeta templates) 
-		presenta los usuarios existentes en la tabla de usuarios de la BD
+	Ventana modal con los formularios de LOGIN y REGISTRO - login.html ( carpeta templates/users) 
+		un template con doble funcion que permite al usuario LOGEARSE o REGISTRARSE en la pagina (BD User Profiles)
 
-			generada desde la vista listar_usuarios (views.py en la carpeta usuarios)
-			usando los campos del modelo Usuarios (models.py en la carpeta usuarios)
-		
-
-
-Nuevo Usuario
-
-	Formato de entrada de usuarios - crear_usuario.html (carpeta templates) 
-		presenta la forma de entrada de datos para la tabla de usuarios de la BD
-
-			generada y validada desde la vista crear_usuario (views.py en la carpeta usuarios)
-			usando los campos del modelo Usuarios (models.py en la carpeta usuarios)
+			generada y validada desde las vistas signup_view y login_view (views.py en la carpeta usuarios)
+			usando los campos del modelo UserProfile (models.py en la carpeta users)
 
 
-Paginas
+MENU
 
-	Listado de los usuarios - paginas.html (carpeta templates) 
-		presenta las paginas existentes en la tabla de paginas de la BD
+	Opciones que permiten filtrar las publicaciones realizadas segun la seccion a la que pertenecen tales publicaciones.
+	La opcion HOME, siempre regresa a la pagina principal
+	Las siguientes opciones son dinamicas, se generan a partir de la tabla SECCIONES, filtrando solo aquellas que esten habilitadas
+	Una opcion MAS, aparece solo cuando el usuario esta logueado y dentro de esta, habra otras opciones, algunas seran visibles solo si el usuario es SUPERUSER
+		Paginas
+			Listar paginas - template listar_paginas2.html (tabla que lista las paginas y permite hacer un mantenimiento de las mismas)
+			Crear pagina - template crear_pagina.html (formato que permite ingresar una nueva publicacion)
 
-			generada desde la vista listar_pagina (views.py en la carpeta paginas)
-			usando los campos del modelo Paginas (models.py en la carpeta paginas)
+		Secciones
+			Listar secciones - template listar_seccion.html (tabla que lista todas las seccion y permite hacer un mantenimiento de las mismas)
+			Crear seccion - template crear_seccion.html (formato para ingresar una nueva seccion a la bd )
 
+		Usuarios
+			Listar usuarios - template user/user_list.html (tabla que lista todas los usuarios y permite hacer un mantenimiento de las mismos)
+			Crear usuario - se usa la misma ventana modal de registro de usuario mencionada anteriormente
 
-Nueva Pagina
-
-	Formato de entrada de paginas - crear_pagina.html (carpeta templates) 
-		presenta la forma de entrada de datos para la tabla de paginas de la BD
-
-			generada y validada desde la vista crear_pagina (views.py en la carpeta paginas)
-			usando los campos del modelo Paginas (models.py en la carpeta paginas)
-
-
-Perfiles
-
-	Listado de los perfiles - perfiles.html (carpeta templates) 
-		presenta los perfiles existentes en la tabla de paginas de la BD
-
-			generada desde la vista listar_perfiles (views.py en la carpeta perfiles)
-			usando los campos del modelo Perfiles (models.py en la carpeta perfiles)
-
-
-Nuevo Perfil
-
-	Formato de entrada de perfiles - crear_perfil.html (carpeta templates) 
-		presenta la forma de entrada de datos para la tabla de perfiles de la BD
-
-			generada y validada desde la vista crear_perfil (views.py en la carpeta perfiles)
-			usando los campos del modelo Perfiles (models.py en la carpeta perfiles)
 
 
 Search
 
 	La funcionalidad del boton de SEACH del navbar del template base.html (carpeta templates)
 	esta basada en la vista buscar_pagina (views.py en la carpeta paginas)
-		La vista busca el texto introducido en las 3 tablas (paginas, perfiles y usuarios)
+		La vista busca el texto introducido en la tabla (paginas)
 		
 		si la busqueda en paginas es exitosa se presenta el resultado en buscar_paginas.html (carpeta templates)
-		si no es exitosa, se verifica si la busqueda en perfiles es exitosa, si es asi se presenta el resultado en buscar_perfil.html (carpeta templates)
-		si no es exitosa, se verifica si la busqueda en usuarios es exitosa, si es asi se presenta el resultado en buscar_usuario.html (carpeta templates)
-		si no es exitosa, se presenta un error generico en buscar_paginas.html (carpeta templates)
 
 # Carpetas y archivos
 media
@@ -111,28 +84,17 @@ paginas
 		views.py
 
 
-perfiles
+users
 
 	Archivos
 
 		__init__.py
 		admin.py
 		apps.py
+		context_processors.py
 		forms.py
 		models.py
-		urls.py
-		views.py
-
-
-usuarios
-
-	Archivos
-
-		__init__.py
-		admin.py
-		apps.py
-		forms.py
-		models.py
+		tests.py
 		urls.py
 		views.py
 
@@ -140,19 +102,28 @@ usuarios
 templates
 
 	Archivos
-
+		user
+			borrar_usuario.html
+			change_password.html
+			login.html
+			profile.html
+			user_detail.html
+			user_edit.html
+			user_edit2-html
+			user_list.html
+		actualiza_vista.html
+		base_backoffice.html	
 		base.html
+		borrar_pagina.html
 		buscar_paginas.html
-		buscar_perfil.html
-		buscar_usuario.html
 		crear_pagina.html
-		crear_perfil.html
-		crear_usuario.html
+		detalle_pagina.html
+		header.html
 		index.html
-		paginas.html
-		perfiles.html
-		usuarios.html
-
-
-
-Test 2
+		listar_paginas2.html
+		listar_seccion.html
+		menu_celulares.html
+		menu.html
+		noticias.html
+		pie.html
+		sobrenosotros.html
